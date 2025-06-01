@@ -31,7 +31,7 @@ Note: This will work on most machines. It will not work on the newer Mac Machine
 From the menu bar on the left select Firefox for general browsing and interaction with websites. When you download images to the operating system, it keeps these in RAM so that they are not written to disk. In the future, there will be a plugin loaded for safe viewing that will blur CSAM so that you can focus on other parts of an image for investigation. This tool will allow users to toggle the blurring off if it gets in the way of investigations. To start fierfox:
 -Select the firefox icon on the top left bar
 
-### Image Viewer
+#### Image Viewer
 The Gnome Image viewer allows you to see image files. It also allows you to examine properties for these images. To run the image viewer :
 - Press the Show Apps button on the bottom left, type image in the search bar then select terminal icon
 
@@ -64,7 +64,6 @@ It asks you for the following:
 - any notes you want to add for the url. <br> <br>
 - example command `./summary_file.sh ~/Downloads/italy-garda-lake-sailing-club.jpg`
 - output: [here](summary_file.sh.md)
-
 
 
 #### Exiftool

@@ -53,7 +53,7 @@ Terminal is used for a command line interface. To start a terminal either-
 Run this inside of a terminal. This tool creates a summary for a url you specify. You can copy and paste this into whatever reporting system you use. It asks you for the following:
 - an an identifier (name or email)
 - any notes you want to add for the url. <br> <br>
-- example command `./summary_url.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club-225.jpg`
+- example command `summary_url.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club-225.jpg`
 - output: [here](summary_url.sh.md)
 
 
@@ -63,7 +63,7 @@ It asks you for the following:
 - The link you downloaded this file from
 - an an identifier (name or email)
 - any notes you want to add for the url. <br> <br>
-- example command `./summary_file.sh ~/Downloads/italy-garda-lake-sailing-club.jpg`
+- example command `summary_file.sh ../images/italy-garda-lake-sailing-club.jpg`
 - output: [here](summary_file.sh.md)
 
 
@@ -117,7 +117,7 @@ ssdeep,1.1--blocksize:hash:hash,filename <br>
 <br>
 
 2. ssdeep_compare_url is a script that lets you compare two images in a friendly manner given two urls. The higher the number in parentheses the closer the two files are. This is between 0 and 100. Because of inexact nature of fuzzy hashing, note that just because ssdeep indicates that two files match, it does not mean that those files are related. You should examine every pair of matching files individually to see how well they correspond. See paper [Here](https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub) for detail on matching score
-- example command `./ssdeep_compare_urls.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg`
+- example command `ssdeep_compare_urls.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg`
 - output: <br>
 /Downloading https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg<br>
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current <br>
@@ -132,7 +132,7 @@ Comparing links https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-
 <br>
 
 3. ssdeep_compare_file is a script that lets you compare two images in a friendly manner given two files. The higher the number in parentheses the closer the two files are. This is between 0 and 100. Because of inexact nature of fuzzy hashing, note that just because ssdeep indicates that two files match, it does not mean that those files are related. You should examine every pair of matching files individually to see how well they correspond. See paper [Here](https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub) for detail on matching score
-- example command `./ssdeep_compare_files.sh ../images/italy-garda-lake-sailing-club.jpg ../images/italy-garda-lake-sailing-club_modified.jpg`
+- example command `ssdeep_compare_files.sh ../images/italy-garda-lake-sailing-club.jpg ../images/italy-garda-lake-sailing-club_modified.jpg`
 - output: <br>
 /home/ncptf/RAMSAFE/images/italy-garda-lake-sailing-club_modified.jpg matches /home/ncptf/RAMSAFE/images/italy-garda-lake-sailing-club.jpg (99)
 <br>

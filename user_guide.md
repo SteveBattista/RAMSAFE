@@ -3,18 +3,18 @@ If you are interested in building this environment please go here [Build Guide](
 
 ## Quick User guide
 1. Purchase a USB drive of at least 64GB.
-2. Download RAMSAFE from here
-3. Use a tool like [RUFUS](https://rufus.ie/en/) if you are in windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load RAMSAFE .iso to USB
-4. Plug USB drive 
-6. Reboot machine. <br>
+2. Download RAMSAFE from [Not Downloadable yet](https://ramsafe.org)
+3. Plug in USB drive
+4. Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load the RAMSAFE.iso to USB
+5. Reboot machine. <br>
     a. While rebooting press the Boot time menu (F12 for Dell)<br>
     b. This loads a whole new Operating system<br>
     c. Help investigate CSAM perpetrators<br>
     d. end tips to law enforcement<br>
     e. While you work, all work is in memory so it is not kept and it does not write anything to disk<br>
-7. Reboot
-8. Remove USB
-9. Original operating system is untouched. 
+6. Reboot
+7. Remove USB
+8. Original operating system is untouched. 
 
 Note: This will work on most machines. It will not work on the newer Mac Machines that use the M series Chips as they are ARM based.
 
@@ -22,9 +22,9 @@ Note: This will work on most machines. It will not work on the newer Mac Machine
 
 ### Submission tips:
 1. When submitting a url, the recommend format is [here](summary_file.sh)
-- You can either assemble this manually or use the tool [summary_url.sh](#Summary-of-a-URL)
+- You can either assemble this manually using the tools in RAMSAFE use the tool [summary_url.sh](#Summary-of-a-URL)
 2. When submitting for a file , the recommend format is [here](summary_file.sh)
-- You can either assemble this manually or use the tool [summary_file.sh](#Summary-of-a-File)
+- You can either assemble this manually tools in RAMSAFE or use the tool [summary_file.sh](#Summary-of-a-File)
 
 ### Useful tools 
 #### Firefox

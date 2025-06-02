@@ -23,7 +23,6 @@ sudo apt remove rhythmbox -y
 sudo apt remove libreoffice -y
 #remove printing
 sudo apt remove cups -y
-#remove unneeded items
 #remove gnome games
 sudo apt remove gnome-games -y
 #remove gnome chess
@@ -34,11 +33,9 @@ sudo apt autoremove -y
 #set wallpaper
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/ramsafe_wallpaper.png'
 #clone files from github
-sudo git clone <items to clone to share>
+sudo git clone https://github.com/SteveBattista/RAMSAFE.git
 #move wallpaper to correct location
-smv ramsafe_wallpaper.png /usr/share/ramsafe_wallpaper.png
-#move icon files to correct location
-sudo mv ramsafe.png /usr/share/icons/
+mv ramsafe_wallpaper.png /usr/share/ramsafe_wallpaper.png
 # move tools to correct location
 cp RAMSAFE/bin ~/bin
 #add ~bin to PATH

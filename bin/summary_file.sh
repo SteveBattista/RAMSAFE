@@ -31,7 +31,7 @@ fi
 file_ssdeep=$(ssdeep "$file" | awk '{ print $1 }')
 # Get the exif data of the file
 if command -v exiftool &> /dev/null; then
-    file_exif=$(exiftool "$file")
+    file_exif=$(exiftool -j "$file")
 else
     echo "exiftool could not be found. Skipping EXIF data extraction."
     file_exif="EXIF data extraction skipped."

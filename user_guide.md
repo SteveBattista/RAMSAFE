@@ -69,7 +69,7 @@ It asks you for the following:
 
 #### Exiftool
 Run this inside of a terminal. This lists any meta-data included in the image. This can be used to find GPS coordinates or images that have the same characteristics that might have been taken with the same type of camera. Many websites strip this things like GPS out of the images. RAMSAFE includes a sample image. rTo test this type the following:
-- example command: `exiftool ~/Downloads/italy-garda-lake-sailing-club.jpg`
+- example command: `exiftool -j ~/Downloads/italy-garda-lake-sailing-club.jpg`
 - output : [here](exiftool_output)
 
 ### Exact size

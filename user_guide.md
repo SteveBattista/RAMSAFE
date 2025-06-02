@@ -80,22 +80,26 @@ Run this in a terminal. The exiftool provides a more user friendly value to the 
 
 #### Standard Hashes
 These are all run within a terminal. They provide a fixed string that under most circumstances are unique for identification for a file. If one bit in the image changes, the hash changes. Therefore two similar looking images will have unique hashes The longer the hash in bit size, the higher the probability that it will be unique. In the case of a 256 bit hash matching another file is 1/(256<sup>2</sup>). This is incredibly small. Any change has a 50% chance of changing any bit in the result.
+<br>
 
 1. MD5: a 128-bit (32-character hexadecimal) hash value from any input data. MD5 is no longer considered secure for cryptographic purposes due to vulnerabilities to collisions (different inputs producing the same hash).
 - example command `md5sum ~/Downloads/italy-garda-lake-sailing-club.jpg`
 - output: <br>
 e1e51fca9ffcd158696558d1dfe18b7d  /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
 <br>
+
 2. SHA-1: a 128-bit (32-character hexadecimal) hash value from any input data. SHA-1 is now considered insecure for cryptographic purposes because vulnerabilities have been found that allow attackers to create collisions (different inputs producing the same hash). It is recommended to use stronger hash functions like SHA-256 or SHA-512.
 - example command `sha1sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg`
 - output:<br>
 9b4b1d5070c4e8d0b1945eaf7f7294a5319f4568  /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
 <br>
+
 3. SHA-256:  a 256-bit (64-character hexadecimal) hash value from any input data. SHA-256 is considered secure and resistant to collisions, making it suitable for modern cryptographic applications.
 - example command: `sha256sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg`
 - output: <br>
 2f71bfe034770fe0283f9fa9d3f045a0f1f40123994a4d6039bcb757229d6efc  /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg```
 <br>
+
 4. SHA-512:   a 512-bit (128 character hexadecimal) hash value from any input data. SHA-512 is considered secure and resistant to collisions, making it suitable for modern cryptographic applications. SHA-512 is 30-40% faster than SHA-256 for large files. The size of the hash is a bit cumbersome to check.
 - example command `sha512sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg`
 - output: <br>

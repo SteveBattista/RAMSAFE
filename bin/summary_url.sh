@@ -72,4 +72,4 @@ json_string=$(jq -n \
 )
 echo "$json_string" | jq .
 # Clean up the temporary file
-rm -f "$file"
+shred -f -z "$file"

@@ -135,6 +135,9 @@ Comparing links https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-
 - output: <br>
 /home/ncptf/RAMSAFE/images/italy-garda-lake-sailing-club_modified.jpg matches /home/ncptf/RAMSAFE/images/italy-garda-lake-sailing-club.jpg (99)
 <br>
+
+4. Comparing multiple directories of images:
+<br>
 - example command `ssdeep -l -r -p Incoming Outgoing Trash`
 - output: <br>
 Incoming/Budget 2007.doc matches Outgoing/Corporate Espionage/Our Budget.doc (99) <br>

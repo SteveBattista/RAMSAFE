@@ -9,20 +9,20 @@ The tools in this toolset write to disk. When running within RAMSAFE, they will 
 
 ## Quick User guide ( I don't want to read the rest of the docs)
 1. Purchase a USB drive of at least 64GB.
-2. Download RAMSAFE from [Not Downloadable yet](https://ramsafe.org)
-3. Plug in USB drive
-4. Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load the RAMSAFE.iso to USB
+2. Download RAMSAFE from [Not Downloadable yet](https://ramsafe.org),
+3. Plug in USB drive,
+4. Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load the RAMSAFE.iso to USB.
 5. Reboot machine. <br>
     a. While rebooting press the Boot time menu (F12 for Dell)<br>
     b. This loads a whole new Operating system<br>
     c. Help investigate CSAM perpetrators<br>
     d. end tips to law enforcement<br>
     e. While you work, all work is in memory so it is not kept and it does not write anything to disk<br>
-6. Reboot
-7. Remove USB
+6. Reboot machine.
+7. Remove USB.
 8. Original operating system is untouched. 
 
-Note: This will work on most machines. It will not work on the newer Mac Machines that use the M series Chips as they are ARM based.
+Note: This will work on most machines. It will not work on the newer Mac Machines that use the M series chips as they are ARM based.
 
 ## Full User Guide
 Please go to the [User Guide](user_guide.md)

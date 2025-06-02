@@ -110,6 +110,7 @@ ssdeep is a tool that allows you to get a fuzzy hash of a file. This allows you 
 ssdeep,1.1--blocksize:hash:hash,filename <br>
 12288:AkdtAf/s7PeFRsY3QnaGp092YAlhduM30RgbotuKwEOc94hHP9kPcIVvIJGPYt:FIf4ebRDG+cnXeuK+c94XkYEPW,"/home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg"
 <br>
+
 2. ssdeep_compare_url is a script that lets you compare two images in a friendly manner given two urls. The higher the number in parentheses the closer the two files are. This is between 0 and 100. Because of inexact nature of fuzzy hashing, note that just because ssdeep indicates that two files match, it does not mean that those files are related. You should examine every pair of matching files individually to see how well they correspond. See paper [Here](https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub) for detail on matching score
 - example command `./ssdeep_compare_urls.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg`
 - output: <br>
@@ -124,6 +125,7 @@ Downloading https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club
 Comparing links https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg and https://www.geoimgr.com/images/samples/<BR>italy-garda-lake-sailing-club.jpg
 /tmp/tmp.WKZ34l9MB4 matches /tmp/tmp.hY95hfgDBw (100)<BR>
 <br>
+
 3. ssdeep_compare_file is a script that lets you compare two images in a friendly manner given two files. The higher the number in parentheses the closer the two files are. This is between 0 and 100. Because of inexact nature of fuzzy hashing, note that just because ssdeep indicates that two files match, it does not mean that those files are related. You should examine every pair of matching files individually to see how well they correspond. See paper [Here](https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub) for detail on matching score
 - example command `./ssdeep_compare_files.sh ../images/italy-garda-lake-sailing-club.jpg ../images/italy-garda-lake-sailing-club_modified.jpg`
 - output: <br>

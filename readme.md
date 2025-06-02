@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="ramsafe_icon.ico" alt="RAMSAFE Icon">
+  <img src="ramsafe_wallpaper.ico" alt="RAMSAFE Icon">
 </div>
 <br>
 

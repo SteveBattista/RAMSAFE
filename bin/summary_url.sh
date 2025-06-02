@@ -17,6 +17,7 @@ if ! command -v curl &> /dev/null; then
 fi
 # Download the file from the URL
 file=$(mktemp)
+echo "Downloading file from $url"
 if ! curl -o "$file" "$url"; then
     echo "Failed to download the file from $url"
     exit 1

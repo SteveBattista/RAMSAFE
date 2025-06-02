@@ -1,10 +1,10 @@
 <div align="center">
-  <img src="ramsafe_icon.png" alt="RAMSAFE Icon">
+  <img src="ramsafe_icon.ico" alt="RAMSAFE Icon">
 </div>
 <br>
 #  RAMSAFE: RAM-based Secure Analysis Forensics Environment
 For a live USB Linux distribution designed for the National Child Protection Task Force (NCPTF), whose primary goal is to operate entirely in memory (RAM) to prevent any child sexual abuse material (CSAM) from being written to disk, and which includes tools to help interact with images for law enforcement.<br>
-The tools in this toolset write to disk. When running within RAMSAFE, they will not write to a hard-drive but only to RAM. If you use the tools in this repository with a standard linux on a hard-drive they will write files to the disk. This means that if somone looks at that hard-drive these files may be found on them. 
+The tools in this toolset write to disk. When running within RAMSAFE, they will not write to a hard-drive but only to RAM. If you use the tools in this repository with a standard linux on a hard-drive they will write files to the disk. This means that if someone looks at that hard-drive these files may be found on them. 
 
 ## Quick User guide ( I don't want to read the docs)
 1. Purchase a USB drive of at least 64GB.

@@ -3,11 +3,11 @@ If you are interested in the user guide please go to the [User Guide](user_guide
 # Build guide
 1. Start with an Ubuntu operating system
 2. Download an Ubuntu Desktop from here [Ubuntu Desktop](https://ubuntu.com/download/desktop)
-3. Run the following command in a terminal<br>:
-`sudo apt-add-repository universe <br>
-sudo apt-add-repository ppa:cubic-wizard/release <br>
-sudo apt update<br>
-sudo apt install --no-install-recommends cubic`<br>
+3. Run the following command in a terminal:<br>
+`sudo apt-add-repository universe` <br>
+`sudo apt-add-repository ppa:cubic-wizard/release` <br>
+`sudo apt update`<br>
+`sudo apt install --no-install-recommends cubic`<br>
 Addtional insuctions can be found [Here](https://github.com/PJ-Singh-001/Cubic)
 4. Either select cubic by either
 - pressing the Show Apps button on the bottom left, type cubic in the search bar then select cubic icon

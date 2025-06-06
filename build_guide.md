@@ -13,6 +13,9 @@ Addtional insuctions can be found [Here](https://github.com/PJ-Singh-001/Cubic)
 - pressing the Show Apps button on the bottom left, type cubic in the search bar then select cubic icon
 - or by running `cubic` in a terminal
 5. General instructions on how to use cubic are located in [instructions](https://github.com/PJ-Singh-001/Cubic)
+6. Get to the virtual enviroment termanial
+  - `sudo apt install git && mkdir /install && cd install && git clone https://github.com/SteveBattista/RAMSAFE.git && cd RAMSAFE/bin`
+  - 
 6. Copy and paste install_script into second screen to add and remove programs.
 7. Finish building .iso
 8. Plug in at least a 64GB USB

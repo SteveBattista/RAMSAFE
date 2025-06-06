@@ -29,9 +29,8 @@ sudo apt remove gnome-chess -y
 sudo apt update && apt upgrade -y
 #clean up
 sudo apt autoremove -y
-mv ramsafe_wallpaper.png /usr/share/ramsafe_wallpaper.png
 echo 'export PATH="/install/RAMSAFE/bin:$PATH"' >> ~/.bashrc
 line="@reboot /install/RAMSAFE/bin/on_boot.sh"
-(crontab -u root -l; echo "$line" ) | crontab -u root -
+ echo "$line"  | crontab -u root -
 
 

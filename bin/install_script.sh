@@ -27,15 +27,11 @@ sudo apt remove gnome-games -y
 sudo apt remove gnome-chess -y
 #update and upgrade
 sudo apt update && apt upgrade -y
-#Need to remove auto installer thing for ubuntu
-systemctl disable ubiquity
 #clean up
 sudo apt autoremove -y
-#set wallpaper
-gsettings set org.gnome.desktop.background picture-uri 'file:///install/RAMSAFE/ramsafe_wallpaper.png'
-#move wallpaper to correct location
 mv ramsafe_wallpaper.png /usr/share/ramsafe_wallpaper.png
 echo 'export PATH="/install/RAMSAFE/bin:$PATH"' >> ~/.bashrc
-#set icons on left
-gsettings set org.gnome.shell favorite-apps "['firefox_firefox.desktop', 'org.gnome.eog.desktop', 'vlc.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
+line="@reboot /install/RAMSAFE/bin/on_boot.sh"
+(crontab -u root -l; echo "$line" ) | crontab -u root -
+
 

@@ -29,7 +29,7 @@ Note: This will work on most machines. It will not work on the newer Mac Machine
 
 ### Useful tools 
 #### Firefox
-From the menu bar on the left select Firefox for general browsing and interaction with websites. When you download images to the operating system, it keeps these in RAM so that they are not written to disk. In the future, there will be a plugin loaded for safe viewing that will blur CSAM so that you can focus on other parts of an image for investigation. This tool will allow users to toggle the blurring off if it gets in the way of investigations. To start fierfox:
+From the menu bar on the left select Firefox for general browsing and interaction with websites. When you download images to the operating system, it keeps these in RAM so that they are not written to disk. In the future, there will be a plugin loaded for safe viewing that will blur CSAM so that you can focus on other parts of an image for investigation. This tool will allow users to toggle the blurring off if it gets in the way of investigations. To start firefox:
 -Select the firefox icon on the top left bar
 
 #### Image Viewer

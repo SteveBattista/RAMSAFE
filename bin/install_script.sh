@@ -9,9 +9,9 @@ apt update && apt upgrade -y
 apt remove cups thunderbird -y
 #clean up
 sudo apt autoremove -y
-git 
 echo 'export PATH="/install/RAMSAFE/bin:$PATH"' >> ~/.bashrc
-line="@reboot /install/RAMSAFE/bin/on_boot.sh"
- echo "$line"  | crontab -u root -
+mv /install/RAMSAFE/graphics_update.service /etc/systemd/system/
+systemctl enable my-clone-sync.service
+systemctl start my-clone-sync.service
 
 

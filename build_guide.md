@@ -15,7 +15,7 @@ Additional instructions can be found [Here](https://github.com/PJ-Singh-001/Cubi
 - General instructions on how to use cubic are located in [instructions](https://github.com/PJ-Singh-001/Cubic)
 5. Select a directory to build ramsafe (I use ramsafe)
 6. Get to the virtual environment terminal and type the following
-  - `sudo apt install git && mkdir /install && cd install && git clone https://github.com/SteveBattista/RAMSAFE.git && cd RAMSAFE/bin && ./install_script.sh`
+  - `apt install git -y && mkdir /install && cd install && git clone https://github.com/SteveBattista/RAMSAFE.git && cd RAMSAFE/bin && ./install_script.sh`
 7. Select Next
 8. Select Next
 9. Select finish

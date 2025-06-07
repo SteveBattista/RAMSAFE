@@ -1,0 +1,10 @@
+[Unit]
+Description=Update Graphics
+
+[Service]
+Type=oneshot
+ExecStart=/install/RAMSAFE/bin/on_boot.sh
+RemainAfterExit=no
+
+[Install]
+WantedBy=basic.target

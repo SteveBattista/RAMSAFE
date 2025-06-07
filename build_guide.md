@@ -19,7 +19,7 @@ Addtional insuctions can be found [Here](https://github.com/PJ-Singh-001/Cubic)
 7. Select Next
 8. Select Next
 9. Select finish
-8. Plug in at least a 16GB USB
+8. Plug in at least a 8GB USB
 9. Use a tool like [RUFUS](https://rufus.ie/en/) if you are in windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load RAMSAFE .iso to a USB
 10. You now have a useable Live USB item<br>
 Notes:<BR>

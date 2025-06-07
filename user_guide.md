@@ -3,7 +3,7 @@ If you are interested in building this environment please go here [Build Guide](
 If you use the tools in this repository with a standard linux on a hard-drive they will write files to the disk. This means that if someone looks at that hard-drive these files may be found on them. 
 
 ## Quick User guide
-1. Purchase a USB drive of at least 16GB.
+1. Purchase a USB drive of at least 8GB.
 2. Download RAMSAFE from [Not Downloadable yet](https://ramsafe.org),
 3. Plug in USB drive,
 4. Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load the RAMSAFE.iso to USB.

@@ -1,30 +1,10 @@
 #!/bin/bash
 # This script installs the necessary dependencies for the project.
 # It is intended to be run on a fresh Ubuntu 22.04 installation.
-#install curl
-sudo apt install curl -y
-#install pv
-sudo apt install pv -y
-#install jq
-sudo apt install jq -y
-#install ssdeep
-sudo apt install ssdeep -y
-#install exiftool
-sudo apt install exiftool -y
-#add vlc
-sudo apt install vlc -y
-#add fish shell
-sudo apt install fish -y
-#remove rythmbox (audio player)
-sudo apt remove rhythmbox -y
-#remove libreoffice
-sudo apt remove libreoffice -y
-#remove printing
-sudo apt remove cups -y
-#remove gnome games
-sudo apt remove gnome-games -y
-#remove gnome chess
-sudo apt remove gnome-chess -y
+#install items
+sudo apt install curl pv jq ssdeep exiftool vlc fish gstreamer0.10-ffmpeg gstreamer0.10-plugins-ugly gstreamer0.10-plugins-bad gstreamer0.10-bad-multiverse -y
+# remove items 
+sudo apt remove rhythmbox libreoffice cups apt remove gnome-games remove gnome-chess -y
 #update and upgrade
 sudo apt update && apt upgrade -y
 #clean up

@@ -12,14 +12,19 @@ Addtional insuctions can be found [Here](https://github.com/PJ-Singh-001/Cubic)
 4. Either select cubic by either
 - pressing the Show Apps button on the bottom left, type cubic in the search bar then select cubic icon
 - or by running `cubic` in a terminal
-5. General instructions on how to use cubic are located in [instructions](https://github.com/PJ-Singh-001/Cubic)
+- General instructions on how to use cubic are located in [instructions](https://github.com/PJ-Singh-001/Cubic)
+5. Select a directory to build ramsafe (I use ramsafe)
 6. Get to the virtual enviroment termanial and type the following
   - `sudo apt install git && mkdir /install && cd install && git clone https://github.com/SteveBattista/RAMSAFE.git && cd RAMSAFE/bin && ./install_script.sh`
-6. Copy and paste install_script into second screen to add and remove programs.
-7. Finish building .iso
+7. Select Next
+8. Select Next
+9. Select finish
 8. Plug in at least a 64GB USB
 9. Use a tool like [RUFUS](https://rufus.ie/en/) if you are in windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load RAMSAFE .iso to USB
-10. You now have a useable Live USB item
+10. You now have a useable Live USB item<br>
+Notes:<BR>
+-  I would reecomend a minium of  2 cores, 4GB and 50 GB of space to build this image.
+-  The ISO I made the last time I did this was 
 
 
 

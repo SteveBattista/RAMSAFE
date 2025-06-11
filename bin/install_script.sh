@@ -11,10 +11,10 @@ apt remove cups thunderbird -y
 apt autoremove -y
 # move desktop graphics item 
 echo 'export PATH="/install/RAMSAFE/bin:$PATH"' >> ~/.bashrc
-apt autoremove --purge snapd
-apt autoremove --purge "?name(libreoffice)"
-apt autoremove --purge "?name(thunderbird)"
-apt autoremove --purge "?name(shotwell)"
+#apt autoremove --purge snapd
+apt autoremove --purge -y "?name(libreoffice)"
+apt autoremove --purge -y "?name(thunderbird)"
+apt autoremove --purge -y "?name(shotwell)"
 
 
 

@@ -8,10 +8,10 @@ apt update && apt upgrade -y
 # remove items 
 apt remove cups thunderbird -y
 #clean up
-sudo apt autoremove -y
+apt autoremove -y
+# move desktop graphics item 
 echo 'export PATH="/install/RAMSAFE/bin:$PATH"' >> ~/.bashrc
 mv /install/RAMSAFE/graphics_update.service /etc/systemd/system/
-systemctl enable my-clone-sync.service
-systemctl start my-clone-sync.service
+
 
 

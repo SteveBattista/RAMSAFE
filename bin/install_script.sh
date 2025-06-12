@@ -15,8 +15,7 @@ echo ********** Clean up **********
 apt autoremove -y
 echo ********** Add tools to PATH **********
 echo 'export PATH="/install/RAMSAFE/bin:$PATH"' >> ~/.bashrc
-
-
+cat /install/RAMSAFE/bin/install_script.sh >>  /etc/skel/.profile
 
 
 

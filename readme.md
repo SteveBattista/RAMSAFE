@@ -13,11 +13,14 @@ The tools in this toolset write to disk. When running within RAMSAFE, they will 
 3. Plug in USB drive,
 4. Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load the RAMSAFE.iso to USB.
 5. Reboot machine. <br>
-    a. While rebooting press the Boot time menu (F12 for Dell)<br>
-    b. This loads a whole new Operating system<br>
-    c. Help investigate CSAM perpetrators<br>
-    d. end tips to law enforcement<br>
-    e. While you work, all work is in memory so it is not kept and it does not write anything to disk<br>
+    a. WWhile rebooting press the Boot time menu (F12 for Dell)<br>
+    b. Follow Prompts for keyboard and network.
+    c. No need to update installer as you are not installing this os.
+    d. Select try (no need to select install)
+    e. This loads a whole new Operating system<br>
+    f. Help investigate CSAM perpetrators<br>
+    g. end tips to law enforcement<br>
+    h. While you work, all work is in memory so it is not kept and it does not write anything to disk<br>
 6. Reboot machine.
 7. Remove USB.
 8. Original operating system is untouched. 

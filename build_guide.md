@@ -26,7 +26,7 @@ Additional instructions can be found [Here](https://github.com/PJ-Singh-001/Cubi
 10. You now have a useable Live USB item<br>
 Notes:<BR>
 -  I would recommend a minium of  2 cores, 4GB and 50 GB of space to build this image.
--  The ISO I made the last time I did this was 
+-  The ISO I made the last time I did this was 5.6GB
 
 
 

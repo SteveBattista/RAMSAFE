@@ -17,6 +17,8 @@ Additional instructions can be found [Here](https://github.com/PJ-Singh-001/Cubi
 6. Get to the virtual environment terminal and type the following
   - `apt install git -y && mkdir /install && cd /install && git clone https://github.com/SteveBattista/RAMSAFE.git && cd RAMSAFE/bin && ./install_script.sh`
 7. Select Next
+8. Select Boot
+9. Replace text "Try or install Ubuntu" with Run RAMSAFE"
 8. Select Next
 9. Select finish
 8. Plug in at least a 8GB USB

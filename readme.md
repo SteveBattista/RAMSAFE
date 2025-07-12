@@ -11,7 +11,7 @@ The tools in this toolset write to disk. When running within RAMSAFE, they will 
 ## Quick User guide ( I don't want to read the rest of the docs)
 
 1. Purchase a USB drive of at least 8GB.
-2. Download RAMSAFE from [Not Downloadable yet](https://ramsafe.org), SHA256 hash of .iso is **NOT READY YET**
+2. Download RAMSAFE from [Not Downloadable yet](https://ramsafe.org), SHA256 hash of .iso is <b> NOT READY YET </b> (This build guie works but there is not a site for storage. Contact NCPTF and ask them to contact me for a copy)
 3. Plug in USB drive,
 4. Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load the RAMSAFE.iso to USB.
 5. Reboot machine. <br>

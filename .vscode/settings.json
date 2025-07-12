@@ -1,15 +1,27 @@
 {
     "cSpell.words": [
         "acsp",
+        "argjson",
+        "blocksize",
+        "bootable",
+        "CSAM",
+        "Customizer",
         "Dload",
+        "exif",
+        "exiftool",
         "Flashpix",
         "GPSDOP",
         "gsettings",
         "Hyperfocal",
         "JFIF",
+        "NCPTF",
+        "RAMSAFE",
         "Sazep",
         "shotwell",
         "skel",
+        "ssdeep",
+        "tonumber",
+        "UEFI",
         "Xferd",
         "YEPW"
     ]

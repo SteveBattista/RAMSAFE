@@ -17,7 +17,7 @@
 5. 🔄 Reboot machine.
     1. ⌨️ While rebooting press the Boot time menu (F12 for Dell)
     2. 🖥️ Follow Prompts for keyboard and network.
-    3. ❌ No need to update installer as you are not installing this os.
+    3. ❌ No need to update installer as you are not installing this os. **WARNING if you select install and follow though it will erase your hard-drive**
     4. ✅ Select try (no need to select install)
     5. 💻 This loads a whole new Operating system
     6. 🕵️ Help investigate CSAM perpetrators

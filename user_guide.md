@@ -30,11 +30,11 @@ If you are interested in building this environment please go here [Build Guide](
 
 1. 🌐 When submitting a url, the recommend format is [in summary file](summary_url.sh.md)
 
-- 🔧 You can either assemble this manually using the tools in RAMSAFE use the tool [summary_url.sh](summary_file.sh)
+- 🔧 You can either assemble this manually using the tools in RAMSAFE use the tool [summary_url.sh](bin/summary_file.sh)
 
 2. 📁 When submitting for a file on your RAMSAFE drive, here is the the recommend [format](summary_file.sh.md)
 
-- 🔧 You can either assemble this manually tools in RAMSAFE or use the tool [summary_file.sh](summary_file.sh)
+- 🔧 You can either assemble this manually tools in RAMSAFE or use the tool [summary_file.sh](bin/summary_file.sh)
 
 ### 🛠️ Useful tools
 

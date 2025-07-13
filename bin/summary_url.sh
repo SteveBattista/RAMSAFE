@@ -33,16 +33,16 @@ set -e
 
 # Ensure exactly one argument is provided  
 if [ "$#" -ne 1 ]; then
-    echo "ERROR: Incorrect number of arguments provided."
-    echo "Usage: $0 <url>"
+    echo "❌ ERROR: Incorrect number of arguments provided."
+    echo "📋 Usage: $0 <url>"
     echo ""
-    echo "Examples:"
+    echo "📝 Examples:"
     echo "  $0 https://example.com/evidence.jpg"
     echo "  $0 'https://site.com/path/image.png'"
     echo "  $0 https://domain.org/files/document.pdf"
     echo ""
-    echo "This tool downloads a file from the specified URL and generates"
-    echo "a comprehensive forensic analysis report in JSON format."
+    echo "🌐 This tool downloads a file from the specified URL and generates"
+    echo "📊 a comprehensive forensic analysis report in JSON format."
     exit 1
 fi
 
@@ -51,34 +51,34 @@ url="$1"
 
 # Verify required tools are installed
 if ! command -v jq &> /dev/null; then
-    echo "ERROR: jq tool not found."
-    echo "jq is required for JSON processing but is not installed."
-    echo "Please install jq to use this script:"
+    echo "❌ ERROR: jq tool not found."
+    echo "🔧 jq is required for JSON processing but is not installed."
+    echo "💡 Please install jq to use this script:"
     echo "  sudo apt install jq"
     exit 1
 fi
 
 if ! command -v curl &> /dev/null; then
-    echo "ERROR: curl tool not found."
-    echo "curl is required for downloading files but is not installed."
-    echo "Please install curl to use this script:"
+    echo "❌ ERROR: curl tool not found."
+    echo "🌐 curl is required for downloading files but is not installed."
+    echo "💡 Please install curl to use this script:"
     echo "  sudo apt install curl"
     exit 1
 fi
 
 if ! command -v ssdeep &> /dev/null; then
-    echo "ERROR: ssdeep tool not found."
-    echo "ssdeep is required for fuzzy hashing but is not installed."
-    echo "Please install ssdeep to use this script:"
+    echo "❌ ERROR: ssdeep tool not found."
+    echo "🔧 ssdeep is required for fuzzy hashing but is not installed."
+    echo "💡 Please install ssdeep to use this script:"
     echo "  sudo apt install ssdeep"
     exit 1
 fi
 
-echo "========================================="
-echo "RAMSAFE URL Evidence Summary Generator"
-echo "========================================="
-echo "Target URL: $url"
-echo "Analysis started: $(date)"
+echo "🌐========================================="
+echo "📊 RAMSAFE URL Evidence Summary Generator"
+echo "🌐========================================="
+echo "🔗 Target URL: $url"
+echo "⏰ Analysis started: $(date)"
 echo ""
 
 # Create secure temporary file for download
@@ -86,7 +86,7 @@ file=$(mktemp)
 
 # Set up cleanup function to securely remove temporary file
 cleanup() {
-    echo "Cleaning up temporary files..."
+    echo "🧹 Cleaning up temporary files..."
     if [ -f "$file" ]; then
         # Use shred to securely overwrite the temporary file
         # This prevents recovery of potentially sensitive evidence
@@ -98,80 +98,80 @@ cleanup() {
 trap cleanup EXIT
 
 # Download the file from the URL
-echo "Downloading file from URL..."
-echo "Source: $url"
+echo "⬇️ Downloading file from URL..."
+echo "🔗 Source: $url"
 
 if ! curl -L -f -s -S -o "$file" "$url"; then
-    echo "ERROR: Failed to download file from URL: $url"
-    echo "Please verify the URL is correct and accessible."
+    echo "❌ ERROR: Failed to download file from URL: $url"
+    echo "🔍 Please verify the URL is correct and accessible."
     exit 1
 fi
 
 # Verify file was downloaded successfully
 if [ ! -f "$file" ] || [ ! -s "$file" ]; then
-    echo "ERROR: File download failed or resulted in empty file."
-    echo "URL: $url"
+    echo "❌ ERROR: File download failed or resulted in empty file."
+    echo "🔗 URL: $url"
     exit 1
 fi
 
-echo "✓ File downloaded successfully ($(stat -c%s "$file") bytes)"
+echo "✅ File downloaded successfully ($(stat -c%s "$file") bytes)"
 
 # Get HTTP headers for additional evidence
-echo "Retrieving HTTP headers..."
+echo "📡 Retrieving HTTP headers..."
 header=$(curl -s -L -I "$url" | tr -d '\r')
-echo "✓ HTTP headers retrieved"
+echo "✅ HTTP headers retrieved"
 
 # Extract file metadata
-echo "Extracting file metadata..."
+echo "📋 Extracting file metadata..."
 file_size=$(stat -c%s "$file")
 download_timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-echo "✓ File size: $file_size bytes"
-echo "✓ Download time: $download_timestamp"
+echo "✅ File size: $file_size bytes"
+echo "✅ Download time: $download_timestamp"
 
 # Generate cryptographic hash for exact file identification
-echo "Generating cryptographic hash..."
+echo "🔐 Generating cryptographic hash..."
 file_sha256=$(sha256sum "$file" | awk '{ print $1 }')
-echo "✓ SHA-256: $file_sha256"
+echo "✅ SHA-256: $file_sha256"
 
 # Generate fuzzy hash for similarity comparisons  
-echo "Generating fuzzy hash..."
+echo "🔍 Generating fuzzy hash..."
 file_ssdeep=$(ssdeep "$file" | tail -n 1 | awk -F',' '{ print $1 }')
-echo "✓ ssdeep: $file_ssdeep"
+echo "✅ ssdeep: $file_ssdeep"
 
 # Extract EXIF metadata if exiftool is available
-echo "Extracting EXIF metadata..."
+echo "📷 Extracting EXIF metadata..."
 if command -v exiftool &> /dev/null; then
     # Extract metadata as JSON for structured storage
     file_exif=$(exiftool -j "$file" | jq -c .)
-    echo "✓ EXIF data extracted successfully"
+    echo "✅ EXIF data extracted successfully"
 else
-    echo "! exiftool not found - EXIF data extraction skipped"
+    echo "⚠️ exiftool not found - EXIF data extraction skipped"
     file_exif="\"EXIF data extraction skipped - exiftool not available\""
 fi
 
 echo ""
-echo "========================================="
-echo "Examiner Input Required"  
-echo "========================================="
+echo "👤========================================="
+echo "📝 Examiner Input Required"  
+echo "👤========================================="
 
 # Collect examiner information for chain of custody
-echo "Please provide the following information for the forensic report:"
+echo "📋 Please provide the following information for the forensic report:"
 echo ""
 
 # Get examiner identification (for chain of custody)
-read -pr "Enter examiner identifier (name, badge, email): " examiner_identifier
+read -pr "👤 Enter examiner identifier (name, badge, email): " examiner_identifier
 while [ -z "$examiner_identifier" ]; do
-    echo "Examiner identification is required for evidence documentation."
-    read -pr "Enter examiner identifier (name, badge, email): " examiner_identifier
+    echo "⚠️ Examiner identification is required for evidence documentation."
+    read -pr "👤 Enter examiner identifier (name, badge, email): " examiner_identifier
 done
 
 # Get any additional notes about the analysis
-read -pr "Enter analysis notes (optional): " file_notes
+read -pr "📝 Enter analysis notes (optional): " file_notes
 
 echo ""
-echo "========================================="
-echo "Generating Forensic Report"
-echo "========================================="
+echo "📊========================================="
+echo "📄 Generating Forensic Report"
+echo "📊========================================="
 
 # Generate comprehensive JSON report using jq
 # This ensures proper JSON formatting and escaping
@@ -213,16 +213,16 @@ json_string=$(jq -n \
 )
 
 echo ""
-echo "FORENSIC ANALYSIS REPORT"
-echo "========================"
+echo "📄 FORENSIC ANALYSIS REPORT"
+echo "📊========================"
 echo "$json_string" | jq .
 
 echo ""
-echo "========================================="
-echo "Report Generation Complete"
-echo "========================================="
-echo "Analysis completed: $(date)"
-echo "This report can be copied and pasted into case management systems."
-echo "IMPORTANT: Save this report before rebooting - RAMSAFE data is not persistent!"
+echo "✅========================================="
+echo "📋 Report Generation Complete"
+echo "✅========================================="
+echo "⏰ Analysis completed: $(date)"
+echo "💾 This report can be copied and pasted into case management systems."
+echo "⚠️ IMPORTANT: Save this report before rebooting - RAMSAFE data is not persistent!"
 
 # Cleanup is handled automatically by the EXIT trap

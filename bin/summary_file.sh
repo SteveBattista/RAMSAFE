@@ -28,16 +28,16 @@ set -e
 
 # Ensure exactly one argument is provided
 if [ "$#" -ne 1 ]; then
-    echo "ERROR: Incorrect number of arguments provided."
-    echo "Usage: $0 <file_path>"
+    echo "❌ ERROR: Incorrect number of arguments provided."
+    echo "📋 Usage: $0 <file_path>"
     echo ""
-    echo "Examples:"
+    echo "📝 Examples:"
     echo "  $0 /path/to/evidence.jpg"
     echo "  $0 ../images/suspicious_file.png"
     echo "  $0 ~/Downloads/evidence_file.pdf"
     echo ""
-    echo "This tool generates a comprehensive forensic analysis report"
-    echo "for the specified file in JSON format."
+    echo "📊 This tool generates a comprehensive forensic analysis report"
+    echo "🗂️ for the specified file in JSON format."
     exit 1
 fi
 
@@ -46,37 +46,37 @@ file="$1"
 
 # Verify the file exists and is readable
 if [ ! -f "$file" ]; then
-    echo "ERROR: File not found or not accessible: $file"
-    echo "Please verify the file path is correct and the file exists."
+    echo "❌ ERROR: File not found or not accessible: $file"
+    echo "🔍 Please verify the file path is correct and the file exists."
     exit 1
 fi
 
 # Verify required tools are installed
 if ! command -v jq &> /dev/null; then
-    echo "ERROR: jq tool not found."
-    echo "jq is required for JSON processing but is not installed."
-    echo "Please install jq to use this script:"
+    echo "❌ ERROR: jq tool not found."
+    echo "🔧 jq is required for JSON processing but is not installed."
+    echo "💡 Please install jq to use this script:"
     echo "  sudo apt install jq"
     exit 1
 fi
 
 if ! command -v ssdeep &> /dev/null; then
-    echo "ERROR: ssdeep tool not found."
-    echo "ssdeep is required for fuzzy hashing but is not installed."
-    echo "Please install ssdeep to use this script:"
+    echo "❌ ERROR: ssdeep tool not found."
+    echo "🔧 ssdeep is required for fuzzy hashing but is not installed."
+    echo "💡 Please install ssdeep to use this script:"
     echo "  sudo apt install ssdeep"
     exit 1
 fi
 
-echo "========================================="
-echo "RAMSAFE File Evidence Summary Generator"
-echo "========================================="
-echo "Analyzing file: $file"
-echo "Analysis started: $(date)"
+echo "🔍========================================="
+echo "📊 RAMSAFE File Evidence Summary Generator"
+echo "🔍========================================="
+echo "🗂️ Analyzing file: $file"
+echo "⏰ Analysis started: $(date)"
 echo ""
 
 # Extract file metadata using stat command
-echo "Extracting file metadata..."
+echo "📋 Extracting file metadata..."
 
 # Get exact file size in bytes (important for verification)
 file_size=$(stat -c%s "$file")
@@ -87,61 +87,61 @@ file_save_date=$(stat -c%y "$file")
 # Get file modification date (when file content was last changed)  
 file_modified_date=$(stat -c%z "$file")
 
-echo "✓ File size: $file_size bytes"
-echo "✓ Save date: $file_save_date" 
-echo "✓ Modified date: $file_modified_date"
+echo "✅ File size: $file_size bytes"
+echo "✅ Save date: $file_save_date" 
+echo "✅ Modified date: $file_modified_date"
 
 # Generate cryptographic hash for exact file identification
-echo "Generating cryptographic hash..."
+echo "🔐 Generating cryptographic hash..."
 file_sha256=$(sha256sum "$file" | awk '{ print $1 }')
-echo "✓ SHA-256: $file_sha256"
+echo "✅ SHA-256: $file_sha256"
 
 # Generate fuzzy hash for similarity comparisons
-echo "Generating fuzzy hash..."
+echo "🔍 Generating fuzzy hash..."
 file_ssdeep=$(ssdeep "$file" | tail -n 1 | awk -F',' '{ print $1 }')
-echo "✓ ssdeep: $file_ssdeep"
+echo "✅ ssdeep: $file_ssdeep"
 
 # Extract EXIF metadata if exiftool is available
-echo "Extracting EXIF metadata..."
+echo "📷 Extracting EXIF metadata..."
 if command -v exiftool &> /dev/null; then
     # Extract metadata as JSON for structured storage
     file_exif=$(exiftool -j "$file" | jq -c .)
-    echo "✓ EXIF data extracted successfully"
+    echo "✅ EXIF data extracted successfully"
 else
-    echo "! exiftool not found - EXIF data extraction skipped"
+    echo "⚠️ exiftool not found - EXIF data extraction skipped"
     file_exif="\"EXIF data extraction skipped - exiftool not available\""
 fi
 
 echo ""
-echo "========================================="
-echo "Examiner Input Required"
-echo "========================================="
+echo "👤========================================="
+echo "📝 Examiner Input Required"
+echo "👤========================================="
 
 # Collect examiner information for chain of custody
-echo "Please provide the following information for the forensic report:"
+echo "📋 Please provide the following information for the forensic report:"
 echo ""
 
 # Get source URL where file was obtained (important for provenance)
-read -pr "Enter the source URL where this file was obtained: " file_link
+read -pr "🔗 Enter the source URL where this file was obtained: " file_link
 while [ -z "$file_link" ]; do
-    echo "Source URL is required for evidence documentation."
-    read -pr "Enter the source URL where this file was obtained: " file_link
+    echo "⚠️ Source URL is required for evidence documentation."
+    read -pr "🔗 Enter the source URL where this file was obtained: " file_link
 done
 
 # Get examiner identification (for chain of custody)
-read -pr "Enter examiner identifier (name, badge, email): " examiner_identifier
+read -pr "👤 Enter examiner identifier (name, badge, email): " examiner_identifier
 while [ -z "$examiner_identifier" ]; do
-    echo "Examiner identification is required for evidence documentation."
-    read -pr "Enter examiner identifier (name, badge, email): " examiner_identifier
+    echo "⚠️ Examiner identification is required for evidence documentation."
+    read -pr "👤 Enter examiner identifier (name, badge, email): " examiner_identifier
 done
 
 # Get any additional notes about the analysis
-read -pr "Enter analysis notes (optional): " file_notes
+read -pr "📝 Enter analysis notes (optional): " file_notes
 
 echo ""
-echo "========================================="
-echo "Generating Forensic Report"
-echo "========================================="
+echo "📊========================================="
+echo "📄 Generating Forensic Report"
+echo "📊========================================="
 
 # Generate comprehensive JSON report using jq
 # This ensures proper JSON formatting and escaping
@@ -186,14 +186,14 @@ json_string=$(jq -n \
 )
 
 echo ""
-echo "FORENSIC ANALYSIS REPORT"
-echo "========================"
+echo "📄 FORENSIC ANALYSIS REPORT"
+echo "📊========================"
 echo "$json_string" | jq .
 
 echo ""
-echo "========================================="
-echo "Report Generation Complete"
-echo "========================================="
-echo "Analysis completed: $(date)"
-echo "This report can be copied and pasted into case management systems."
-echo "IMPORTANT: Save this report before rebooting - RAMSAFE data is not persistent!"
+echo "✅========================================="
+echo "📋 Report Generation Complete"
+echo "✅========================================="
+echo "⏰ Analysis completed: $(date)"
+echo "💾 This report can be copied and pasted into case management systems."
+echo "⚠️ IMPORTANT: Save this report before rebooting - RAMSAFE data is not persistent!"

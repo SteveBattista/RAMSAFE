@@ -212,21 +212,6 @@ ssdeep,1.1--blocksize:hash:hash,filename
 ssdeep_compare_urls.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg
 ```
 
-- 📄 output
-
-```text
-/Downloading https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current 
-                                 Dload  Upload   Total   Spent    Left  Speed 
-100  794k  100  794k    0     0  2913k      0 --:--:-- --:--:-- --:--:-- 2920k 
-Downloading https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg 
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current 
-                                 Dload  Upload   Total   Spent    Left  Speed
-100  794k  100  794k    0     0  4600k      0 --:--:-- --:--:-- --:--:-- 4618k
-Comparing links https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg and https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg
-/tmp/tmp.WKZ34l9MB4 matches /tmp/tmp.hY95hfgDBw (100)
-```
-
 3. 📁 **ssdeep_compare_file** is a script that lets you compare two images in a friendly manner given two files. The higher the number in parentheses the closer the two files are. This is between 0 and 100. Because of inexact nature of fuzzy hashing, note that just because ssdeep indicates that two files match, it does not mean that those files are related. You should examine every pair of matching files individually to see how well they correspond. See See [paper](https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub) for detail on matching score
 
 - 💡 example command
@@ -235,11 +220,6 @@ Comparing links https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-
 ssdeep_compare_files.sh ../images/italy-garda-lake-sailing-club.jpg ../images/italy-garda-lake-sailing-club_modified.jpg
 ```
 
-- 📄 output
-
-```text
-/home/ncptf/RAMSAFE/images/italy-garda-lake-sailing-club_modified.jpg matches /home/ncptf/RAMSAFE/images/italy-garda-lake-sailing-club.jpg (99)
-```
 
 4. 📂 **Comparing multiple directories of images:**
 

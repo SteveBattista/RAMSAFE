@@ -83,7 +83,6 @@ summary_url.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-c
 
 - 📄 output: [summary output](summary_url.sh.md)
 
-
 #### 📁 Summary of a File
 
 Run this inside of a terminal. This tool creates a summary for a file you specify. You can copy and paste this into whatever reporting system you use.
@@ -92,7 +91,7 @@ It asks you for the following:
 - 🔗 The link you downloaded this file from
 - 👤 an an identifier (name or email)
 - 📝 any notes you want to add for the url.
-- 💡 example command 
+- 💡 example command
 
 ```bash summary_file.sh ../images/italy-garda-lake-sailing-club.jpg
 ```
@@ -131,7 +130,7 @@ These are all run within a terminal. They provide a fixed string that under most
 
 1. 🔸 **MD5**: a 128-bit (32-character hexadecimal) hash value from any input data. MD5 is no longer considered secure for cryptographic purposes due to vulnerabilities to collisions (different inputs producing the same hash).
 
-- 💡 example command 
+- 💡 example command
 
 ```bash
 md5sum ~/Downloads/italy-garda-lake-sailing-club.jpg
@@ -227,7 +226,7 @@ Comparing links https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-
 /tmp/tmp.WKZ34l9MB4 matches /tmp/tmp.hY95hfgDBw (100)
 ```
 
-3. 📁 **ssdeep_compare_file** is a script that lets you compare two images in a friendly manner given two files. The higher the number in parentheses the closer the two files are. This is between 0 and 100. Because of inexact nature of fuzzy hashing, note that just because ssdeep indicates that two files match, it does not mean that those files are related. You should examine every pair of matching files individually to see how well they correspond. See See [paper] (https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub) for detail on matching score
+3. 📁 **ssdeep_compare_file** is a script that lets you compare two images in a friendly manner given two files. The higher the number in parentheses the closer the two files are. This is between 0 and 100. Because of inexact nature of fuzzy hashing, note that just because ssdeep indicates that two files match, it does not mean that those files are related. You should examine every pair of matching files individually to see how well they correspond. See See [paper](https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub) for detail on matching score
 
 - 💡 example command
 

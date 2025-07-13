@@ -4,6 +4,7 @@
         "argjson",
         "blocksize",
         "bootable",
+        "coreutils",
         "CSAM",
         "Customizer",
         "Dload",

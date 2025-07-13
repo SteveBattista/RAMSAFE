@@ -8,13 +8,66 @@
 
 ⚠️ **Important Security Notice:** The tools in this toolset write to disk. When running within RAMSAFE, they will not write to a hard-drive but only to RAM. If you use the tools in this repository with a standard linux on a hard-drive they will write files to the disk. This means that if someone looks at that hard-drive these files may be found on them.
 
-## ⚡ Quick User guide (I don't want to read the rest of the docs 😅)
+## 🚀 If using pre-constructed ramsafe.iso and you need to make a bootable USB
 
 1. 🛒 Purchase a USB drive of at least 8GB.
 2. ⬇️ Download RAMSAFE from [Not Downloadable yet](https://ramsafe.org), 🔐 SHA256 hash of .iso is  `121167d6b7c5375cd898c717edd8cb289385367ef8aeda13bf4ed095b7065b0d` (This build guide works but there is not a site for storage. Contact NCPTF for a copy)
-3. 🔌 Plug in USB drive,
-4. 🔥 Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load the RAMSAFE.iso to USB.
-5. 🔄 Reboot machine.
+3. 🔐 Check the hash of the .iso to make sure it matches the expected value:
+
+**For Linux/macOS (bash):**
+
+Option 1 - Use the verification script:
+
+```bash
+# Run the verification script (replace with your actual ISO path)
+./bin/verify_iso.sh ~/Downloads/ramsafe.iso
+```
+
+Option 2 - Manual verification:
+
+```bash
+echo "Expected: 121167d6b7c5375cd898c717edd8cb289385367ef8aeda13bf4ed095b7065b0d"
+CALCULATED=$(sha256sum ramsafe.iso | cut -d' ' -f1)
+echo "Calculated: $CALCULATED"
+if [ "$CALCULATED" = "121167d6b7c5375cd898c717edd8cb289385367ef8aeda13bf4ed095b7065b0d" ]; then
+    echo "✅ VERIFICATION PASSED - ISO is authentic"
+else
+    echo "❌ VERIFICATION FAILED - DO NOT USE THIS ISO"
+fi
+```
+
+**For Windows (PowerShell):**
+
+Option 1 - Use the verification script:
+
+```powershell
+# Run the verification script (replace with your actual ISO path)
+.\bin\verify_iso.ps1 "C:\Downloads\ramsafe.iso"
+```
+
+N.B. You might need to run the following to run a powershell script
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Option 2 - Manual verification:
+
+```powershell
+$expected = "121167d6b7c5375cd898c717edd8cb289385367ef8aeda13bf4ed095b7065b0d"
+$calculated = (Get-FileHash "ramsafe.iso").Hash.ToLower()
+Write-Host "Expected: $expected"
+Write-Host "Calculated: $calculated"
+if ($calculated -eq $expected) {
+    Write-Host "✅ VERIFICATION PASSED - ISO is authentic" -ForegroundColor Green
+} else {
+    Write-Host "❌ VERIFICATION FAILED - DO NOT USE THIS ISO" -ForegroundColor Red
+}
+```
+
+4. 🔌 Plug in USB drive.
+5. 🔥 Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load the RAMSAFE.iso to USB.
+6. 🔄 Reboot machine.
     1. ⌨️ While rebooting press the Boot time menu (F12 for Dell)
     2. 🖥️ Follow Prompts for keyboard and network.
     3. ❌ No need to update installer as you are not installing this os. **WARNING if you select install and follow though it will erase your hard-drive**
@@ -23,9 +76,9 @@
     6. 🕵️ Help investigate CSAM perpetrators
     7. 📧 Send tips to law enforcement
     8. 🧠 While you work, all work is in memory so it is not kept and it does not write anything to disk
-6. 🔄 Reboot machine.
-7. 🔌 Remove USB.
-8. ✅ Original operating system is untouched.
+7. 🔄 Reboot machine.
+8. 🔌 Remove USB.
+9. ✅ Original operating system is untouched.
 
 📝 **Note:** This will boot on most machines. It will not work on the newer Mac Machines that use the M series chips as they are ARM based.
 

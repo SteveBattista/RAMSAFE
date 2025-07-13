@@ -93,7 +93,8 @@ It asks you for the following:
 - 📝 any notes you want to add for the url.
 - 💡 example command
 
-```bash summary_file.sh ../images/italy-garda-lake-sailing-club.jpg
+```bash
+summary_file.sh ../images/italy-garda-lake-sailing-club.jpg
 ```
 
 - 📄 click on the link to find the script [summary file](summary_file.sh.md)
@@ -160,7 +161,8 @@ sha1sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
 
 - 💡 example command:
 
-``` bash sha256sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
+``` bash
+sha256sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
 ```
 
 - 📄 output:
@@ -213,7 +215,6 @@ ssdeep_compare_urls.sh https://www.geoimgr.com/images/samples/italy-garda-lake-s
 - 📄 output
 
 ```text
-
 /Downloading https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current 
                                  Dload  Upload   Total   Spent    Left  Speed 

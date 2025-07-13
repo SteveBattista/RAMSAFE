@@ -65,9 +65,11 @@ if ($calculated -eq $expected) {
 }
 ```
 
-4. 🔌 Plug in USB drive.
-5. 🔥 Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load the RAMSAFE.iso to USB.
-6. 🔄 Reboot machine.
+## ⚡ Quick user guide (I don't want to read all of the instructions 😅)
+
+1. 🔌 Plug in USB drive.
+2. 🔥 Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load the RAMSAFE.iso to USB.
+3. 🔄 Reboot machine.
     1. ⌨️ While rebooting press the Boot time menu (F12 for Dell)
     2. 🖥️ Follow Prompts for keyboard and network.
     3. ❌ No need to update installer as you are not installing this os. **WARNING if you select install and follow though it will erase your hard-drive**
@@ -76,9 +78,9 @@ if ($calculated -eq $expected) {
     6. 🕵️ Help investigate CSAM perpetrators
     7. 📧 Send tips to law enforcement
     8. 🧠 While you work, all work is in memory so it is not kept and it does not write anything to disk
-7. 🔄 Reboot machine.
-8. 🔌 Remove USB.
-9. ✅ Original operating system is untouched.
+4. 🔄 Reboot machine.
+5. 🔌 Remove USB.
+6. ✅ Original operating system is untouched.
 
 📝 **Note:** This will boot on most machines. It will not work on the newer Mac Machines that use the M series chips as they are ARM based.
 

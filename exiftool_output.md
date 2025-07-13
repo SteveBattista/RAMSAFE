@@ -1,3 +1,5 @@
+# Output of exiftool
+
 ```text
 [{
   "SourceFile": "/home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg",

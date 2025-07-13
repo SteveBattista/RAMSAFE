@@ -33,7 +33,7 @@ sudo apt install --no-install-recommends cubic
 7. ⚙️ Press Next, Press Customize, Get to the virtual environment terminal and type the following
 
 ```bash
-apt install git -y && mkdir /install && cd /install && git clone https://github.com/SteveBattista/RAMSAFE.git && cd RAMSAFE/bin && install_script.sh
+sudo apt update && sudo apt upgrade -y && apt install git -y && mkdir /install && cd /install && git clone https://github.com/SteveBattista/RAMSAFE.git && cd RAMSAFE/bin && install_script.sh
 ```
 
 🔧 This will install all of the RAMSAFE specific items needed
@@ -42,11 +42,11 @@ apt install git -y && mkdir /install && cd /install && git clone https://github.
 
 9. 🥾 Select Boot
 
-10. ✏️ Replace text "Try or install Ubuntu" with "Run RAMSAFE"
+10. ✏️ Replace text "Try or install Ubuntu" with "Run RAMSAFE" from the grub.cfg selection.
 
 11. ➡️ Select Next
 
-12. ✅ Select finish
+12. ✅ Select Generate
 
 13. 🔌 Plug in at least a 8GB USB
 

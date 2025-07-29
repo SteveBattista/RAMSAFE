@@ -8,32 +8,84 @@
 # AUTHOR: RAMSAFE Project Team
 # PURPOSE: Verify integrity of RAMSAFE ISO file
 # REQUIREMENTS: bash, sha256sum utility, RAMSAFE ISO file
-# USAGE: ./verify_iso.sh /path/to/ramsafe.iso
+# USAGE: ./verify_iso.sh [OPTIONS] <iso_file_path>
 #
-# Example: ./verify_iso.sh ~/Downloads/ramsafe.iso
+# Options:
+#   -h, --hash HASH    Specify custom expected SHA256 hash
+#   --help             Show this help message
+#
+# Examples: 
+#   ./verify_iso.sh ~/Downloads/ramsafe.iso
+#   ./verify_iso.sh --hash abc123... ~/Downloads/custom.iso
 #
 
 # Exit on any error for safer script execution
 set -e
 
-# Check if exactly one argument is provided
-if [ "$#" -ne 1 ]; then
-    echo "❌ ERROR: Incorrect number of arguments provided."
-    echo "Usage: $0 <iso_file_path>"
+# Default expected SHA256 hash for authentic RAMSAFE ISO
+default_expected="121167d6b7c5375cd898c717edd8cb289385367ef8aeda13bf4ed095b7065b0d"
+expected=""
+iso_path=""
+
+# Function to show usage information
+show_usage() {
+    echo "❓ Usage: $0 [OPTIONS] <iso_file_path>"
     echo ""
-    echo "Examples:"
+    echo "📋 Options:"
+    echo "  -h, --hash HASH    Specify custom expected SHA256 hash"
+    echo "  --help             Show this help message"
+    echo ""
+    echo "📝 Examples:"
     echo "  $0 ~/Downloads/ramsafe.iso"
-    echo "  $0 /path/to/ramsafe.iso"
+    echo "  $0 --hash abc123def456... ~/Downloads/custom.iso"
+    echo "  $0 -h 121167d6b7c5375cd898c717edd8cb289385367ef8aeda13bf4ed095b7065b0d ~/Downloads/ramsafe.iso"
     echo ""
-    echo "This script verifies the SHA256 hash of the RAMSAFE ISO file."
+    echo "🔍 This script verifies the SHA256 hash of an ISO file."
+}
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -h|--hash)
+            expected="$2"
+            shift 2
+            ;;
+        --help)
+            show_usage
+            exit 0
+            ;;
+        -*)
+            echo "❌ ERROR: Unknown option $1"
+            show_usage
+            exit 1
+            ;;
+        *)
+            if [ -z "$iso_path" ]; then
+                iso_path="$1"
+            else
+                echo "❌ ERROR: Multiple file paths provided"
+                show_usage
+                exit 1
+            fi
+            shift
+            ;;
+    esac
+done
+
+# Check if file path is provided
+if [ -z "$iso_path" ]; then
+    echo "❌ ERROR: No ISO file path provided."
+    show_usage
     exit 1
 fi
 
-# Store the input file path
-iso_path="$1"
-
-# Expected SHA256 hash for authentic RAMSAFE ISO
-expected="121167d6b7c5375cd898c717edd8cb289385367ef8aeda13bf4ed095b7065b0d"
+# Use default hash if none specified
+if [ -z "$expected" ]; then
+    expected="$default_expected"
+    echo "💡 Using default RAMSAFE hash for verification"
+else
+    echo "🔧 Using custom hash for verification"
+fi
 
 # Check if the file exists and is readable
 if [ ! -f "$iso_path" ]; then
@@ -49,7 +101,15 @@ if ! command -v sha256sum &> /dev/null; then
     exit 1
 fi
 
-echo "🔍 Verifying RAMSAFE ISO integrity..."
+# Validate hash format (should be 64 hexadecimal characters)
+if ! echo "$expected" | grep -qE '^[a-fA-F0-9]{64}$'; then
+    echo "❌ ERROR: Invalid hash format"
+    echo "Expected SHA256 hash should be 64 hexadecimal characters"
+    echo "Provided: $expected"
+    exit 1
+fi
+
+echo "🔍 Verifying ISO integrity..."
 echo "📁 File: $iso_path"
 
 # Calculate the SHA256 hash of the provided file

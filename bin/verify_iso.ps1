@@ -7,18 +7,79 @@
 # AUTHOR: RAMSAFE Project Team
 # PURPOSE: Verify integrity of RAMSAFE ISO file
 # REQUIREMENTS: PowerShell 5.1 or later, RAMSAFE ISO file
-# USAGE: .\verify_iso.ps1 "path\to\ramsafe.iso"
+# USAGE: .\verify_iso.ps1 [OPTIONS] -IsoPath "path\to\file.iso"
 #
-# Example: .\verify_iso.ps1 "C:\Downloads\ramsafe.iso"
+# Parameters:
+#   -IsoPath         Path to the ISO file to verify (required)
+#   -Hash            Custom expected SHA256 hash (optional)
+#   -Help            Show help information
+#
+# Examples: 
+#   .\verify_iso.ps1 -IsoPath "C:\Downloads\ramsafe.iso"
+#   .\verify_iso.ps1 -IsoPath "C:\Downloads\custom.iso" -Hash "abc123def456..."
+#   .\verify_iso.ps1 -Help
 #
 
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$IsoPath
+    [Parameter(Mandatory=$false)]
+    [string]$IsoPath = "",
+    
+    [Parameter(Mandatory=$false)]
+    [string]$Hash = "",
+    
+    [Parameter(Mandatory=$false)]
+    [switch]$Help
 )
 
-# Expected SHA256 hash for authentic RAMSAFE ISO
-$expected = "121167d6b7c5375cd898c717edd8cb289385367ef8aeda13bf4ed095b7065b0d"
+# Function to show usage information
+function Show-Usage {
+    Write-Host "Usage: .\verify_iso.ps1 [OPTIONS] -IsoPath `"path\to\file.iso`"" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "Parameters:" -ForegroundColor Yellow
+    Write-Host "  -IsoPath         Path to the ISO file to verify (required)" -ForegroundColor Gray
+    Write-Host "  -Hash            Custom expected SHA256 hash (optional)" -ForegroundColor Gray
+    Write-Host "  -Help            Show this help information" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "Examples:" -ForegroundColor Yellow
+    Write-Host "  .\verify_iso.ps1 -IsoPath `"C:\Downloads\ramsafe.iso`"" -ForegroundColor Gray
+    Write-Host "  .\verify_iso.ps1 -IsoPath `"C:\Downloads\custom.iso`" -Hash `"abc123def456...`"" -ForegroundColor Gray
+    Write-Host "  .\verify_iso.ps1 -Help" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "This script verifies the SHA256 hash of an ISO file." -ForegroundColor Gray
+}
+
+# Show help if requested
+if ($Help) {
+    Show-Usage
+    exit 0
+}
+
+# Check if IsoPath is provided
+if ([string]::IsNullOrEmpty($IsoPath)) {
+    Write-Host "[ERROR] No ISO file path provided." -ForegroundColor Red
+    Show-Usage
+    exit 1
+}
+
+# Default expected SHA256 hash for authentic RAMSAFE ISO
+$defaultExpected = "121167d6b7c5375cd898c717edd8cb289385367ef8aeda13bf4ed095b7065b0d"
+
+# Use custom hash if provided, otherwise use default
+if ([string]::IsNullOrEmpty($Hash)) {
+    $expected = $defaultExpected
+    Write-Host "[INFO] Using default RAMSAFE hash for verification" -ForegroundColor Cyan
+} else {
+    $expected = $Hash.ToLower()
+    Write-Host "[INFO] Using custom hash for verification" -ForegroundColor Cyan
+}
+
+# Validate hash format (should be 64 hexadecimal characters)
+if ($expected -notmatch '^[a-fA-F0-9]{64}$') {
+    Write-Host "[ERROR] Invalid hash format" -ForegroundColor Red
+    Write-Host "Expected SHA256 hash should be 64 hexadecimal characters" -ForegroundColor Yellow
+    Write-Host "Provided: $expected" -ForegroundColor Yellow
+    exit 1
+}
 
 # Check if the file exists
 if (-not (Test-Path $IsoPath)) {
@@ -27,7 +88,7 @@ if (-not (Test-Path $IsoPath)) {
     exit 1
 }
 
-Write-Host "[INFO] Verifying RAMSAFE ISO integrity..." -ForegroundColor Cyan
+Write-Host "[INFO] Verifying ISO integrity..." -ForegroundColor Cyan
 Write-Host "File: $IsoPath" -ForegroundColor Gray
 
 # Calculate the SHA256 hash of the provided file

@@ -12,14 +12,14 @@ If you are interested in the user guide please go to the [User Guide](user_guide
 
 3. 🖥️ Run the following command in a terminal:
 
-```bash
-sudo apt-add-repository universe
-sudo apt-add-repository ppa:cubic-wizard/release
-sudo apt update
-sudo apt install --no-install-recommends cubic
-```
+    ```bash
+    sudo apt-add-repository universe
+    sudo apt-add-repository ppa:cubic-wizard/release
+    sudo apt update
+    sudo apt install --no-install-recommends cubic
+    ```
 
-📋 Additional instructions can be found at the [Cubic instructions on GitHub](https://github.com/PJ-Singh-001/Cubic)
+    📋 Additional instructions can be found at the [Cubic instructions on GitHub](https://github.com/PJ-Singh-001/Cubic)
 
 4. 🚀 Either select cubic by either
     - 🔍 pressing the Show Apps button on the bottom left, type cubic in the search bar then select cubic icon
@@ -32,11 +32,11 @@ sudo apt install --no-install-recommends cubic
 
 7. ⚙️ Press Next, Press Customize, Get to the virtual environment terminal and type the following
 
-```bash
-sudo apt update && sudo apt upgrade -y && apt install git -y && mkdir /install && cd /install && git clone https://github.com/SteveBattista/RAMSAFE.git && cd RAMSAFE/bin && install_script.sh
-```
+    ```bash
+    sudo apt update && sudo apt upgrade -y && apt install git -y && mkdir /install && cd /install && git clone https://github.com/SteveBattista/RAMSAFE.git && cd RAMSAFE/bin && install_script.sh
+    ```
 
-🔧 This will install all of the RAMSAFE specific items needed
+    🔧 This will install all of the RAMSAFE specific items needed
 
 8. ➡️ Select Next
 

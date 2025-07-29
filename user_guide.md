@@ -1,6 +1,6 @@
 # 🛡️ RAMSAFE (RAM-based Secure Analysis Forensics Environment) User Guide
 
-If you are interested in building this environment please go here [Build Guide](build_guide.md) 🔨<br>
+If you are interested in building this environment please go here [Build Guide](build_guide.md)
 ⚠️ If you use the tools in this repository with a standard linux on a hard-drive they will write files to the disk. This means that if someone looks at that hard-drive these files may be found on them.
 
 ## ⚡ Quick User guide
@@ -30,11 +30,11 @@ If you are interested in building this environment please go here [Build Guide](
 
 1. 🌐 When submitting a url, the recommend format is [in summary file](summary_url.sh.md)
 
-- 🔧 You can either assemble this manually using the tools in RAMSAFE use the tool [summary_url.sh](bin/summary_file.sh)
+   - 🔧 You can either assemble this manually using the tools in RAMSAFE use the tool [summary_url.sh](bin/summary_file.sh)
 
 2. 📁 When submitting for a file on your RAMSAFE drive, here is the the recommend [format](summary_file.sh.md)
 
-- 🔧 You can either assemble this manually tools in RAMSAFE or use the tool [summary_file.sh](bin/summary_file.sh)
+   - 🔧 You can either assemble this manually tools in RAMSAFE or use the tool [summary_file.sh](bin/summary_file.sh)
 
 ### 🛠️ Useful tools
 
@@ -131,59 +131,59 @@ These are all run within a terminal. They provide a fixed string that under most
 
 1. 🔸 **MD5**: a 128-bit (32-character hexadecimal) hash value from any input data. MD5 is no longer considered secure for cryptographic purposes due to vulnerabilities to collisions (different inputs producing the same hash).
 
-- 💡 example command
+    - 💡 example command
 
-```bash
-md5sum ~/Downloads/italy-garda-lake-sailing-club.jpg
-```
+    ```bash
+    md5sum ~/Downloads/italy-garda-lake-sailing-club.jpg
+    ```
 
-- 📄 output:
+    - 📄 output:
 
-```text
-e1e51fca9ffcd158696558d1dfe18b7d  /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
-```
+    ```text
+    e1e51fca9ffcd158696558d1dfe18b7d  /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
+    ```
 
 2. 🔹 **SHA-1**: a 128-bit (32-character hexadecimal) hash value from any input data. SHA-1 is now considered insecure for cryptographic purposes because vulnerabilities have been found that allow attackers to create collisions (different inputs producing the same hash). It is recommended to use stronger hash functions like SHA-256 or SHA-512.
 
-- 💡 example command
+   - 💡 example command
 
- ```bash
-sha1sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
-```
+   ```bash
+   sha1sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
+   ```
 
-- 📄 output:
+   - 📄 output:
 
-```text
-9b4b1d5070c4e8d0b1945eaf7f7294a5319f4568  /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
-```
+   ```text
+   9b4b1d5070c4e8d0b1945eaf7f7294a5319f4568  /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
+   ```
 
 3. 🔸 **SHA-256**:  a 256-bit (64-character hexadecimal) hash value from any input data. SHA-256 is considered secure and resistant to collisions, making it suitable for modern cryptographic applications.
 
-- 💡 example command:
+   - 💡 example command:
 
-``` bash
-sha256sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
-```
+   ``` bash
+   sha256sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
+   ```
 
-- 📄 output:
+   - 📄 output:
 
-```text
-2f71bfe034770fe0283f9fa9d3f045a0f1f40123994a4d6039bcb757229d6efc  /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
-```
+   ```text
+   2f71bfe034770fe0283f9fa9d3f045a0f1f40123994a4d6039bcb757229d6efc  /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
+   ```
 
 4. 🔸 **SHA-512**:   a 512-bit (128 character hexadecimal) hash value from any input data. SHA-512 is considered secure and resistant to collisions, making it suitable for modern cryptographic applications. SHA-512 is 30-40% faster than SHA-256 for large files. The size of the hash is a bit cumbersome to check.
 
-- 💡 example command
+   - 💡 example command
 
-```bash
-sha512sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg`
-```
+   ```bash
+   sha512sum /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg`
+   ```
 
-- 📄 output:
+   - 📄 output:
 
-```text
-cf4539d55b7ea1330657febc131cc6aacfcd5d20ed595166a8c319604ac46dc977bcf9ea13f1fa562e0decb454696f77eea389dd46a6857a6aeb27e97f0cf499  /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
-```
+   ```text
+   cf4539d55b7ea1330657febc131cc6aacfcd5d20ed595166a8c319604ac46dc977bcf9ea13f1fa562e0decb454696f77eea389dd46a6857a6aeb27e97f0cf499  /home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg
+   ```
 
 #### 🔄 Fuzzy Hashes
 
@@ -191,51 +191,50 @@ ssdeep is a tool that allows you to get a fuzzy hash of a file. This allows you 
 
 1. 🎯 **Creating a fuzzy hash of a file.**
 
-- 💡 example command
+   - 💡 example command
 
-```bash
-ssdeep ~/Downloads/italy-garda-lake-sailing-club.jpg
-```
+   ```bash
+   ssdeep ~/Downloads/italy-garda-lake-sailing-club.jpg
+   ```
 
-- 📄 output:
+   - 📄 output:
 
-```text
-ssdeep,1.1--blocksize:hash:hash,filename 
-12288:AkdtAf/s7PeFRsY3QnaGp092YAlhduM30RgbotuKwEOc94hHP9kPcIVvIJGPYt:FIf4ebRDG+cnXeuK+c94XkYEPW,"/home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg"
-```
+   ```text
+   ssdeep,1.1--blocksize:hash:hash,filename 
+   12288:AkdtAf/s7PeFRsY3QnaGp092YAlhduM30RgbotuKwEOc94hHP9kPcIVvIJGPYt:FIf4ebRDG+cnXeuK+c94XkYEPW,"/home/ncptf/Downloads/italy-garda-lake-sailing-club.jpg"
+   ```
 
 2. 🌐 **ssdeep_compare_url** is a script that lets you compare two images in a friendly manner given two urls. The higher the number in parentheses the closer the two files are. This is between 0 and 100. Because of inexact nature of fuzzy hashing, note that just because ssdeep indicates that two files match, it does not mean that those files are related. You should examine every pair of matching files individually to see how well they correspond. See [paper](https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub) for detail on matching score
 
-- 💡 example command
+   - 💡 example command
 
-``` bash
-ssdeep_compare_urls.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg
-```
+   ``` bash
+   ssdeep_compare_urls.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg
+   ```
 
 3. 📁 **ssdeep_compare_file** is a script that lets you compare two images in a friendly manner given two files. The higher the number in parentheses the closer the two files are. This is between 0 and 100. Because of inexact nature of fuzzy hashing, note that just because ssdeep indicates that two files match, it does not mean that those files are related. You should examine every pair of matching files individually to see how well they correspond. See See [paper](https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub) for detail on matching score
 
-- 💡 example command
+   - 💡 example command
 
-``` bash
-ssdeep_compare_files.sh ../images/italy-garda-lake-sailing-club.jpg ../images/italy-garda-lake-sailing-club_modified.jpg
-```
-
+   ``` bash
+   ssdeep_compare_files.sh ../images/italy-garda-lake-sailing-club.jpg ../images/italy-garda-lake-sailing-club_modified.jpg
+   ```
 
 4. 📂 **Comparing multiple directories of images:**
 
-- 💡 example command
+   - 💡 example command
 
-```bash
-ssdeep -l -r -p Incoming Outgoing Trash
-```
+   ```bash
+   ssdeep -l -r -p Incoming Outgoing Trash
+   ```
 
-- 📄 output
+   - 📄 output
 
-```text
-Incoming/Budget 2007.doc matches Outgoing/Corporate Espionage/Our Budget.doc (99) <br>
-Incoming/Salaries.doc matches Outgoing/Personnel Mayhem/Your Buddy Makes More Than You.doc (45) <br>
-Outgoing/Corporate Espionage/Our Budget.doc matches Incoming/Budget 2007.doc (99) <br>
-Outgoing/Personnel Mayhem/Your Buddy Makes More Than You.doc matches Incoming/Salaries.doc (45) <br>
-Outgoing/Plan for Hostile Takeover.doc matches Trash/DO NOT DISTRIBUTE.doc (88) <br>
-Trash/DO NOT DISTRIBUTE.doc matches Outgoing/Plan for Hostile Takeover.doc (88)<br>
-```
+   ```text
+   Incoming/Budget 2007.doc matches Outgoing/Corporate Espionage/Our Budget.doc (99)
+   Incoming/Salaries.doc matches Outgoing/Personnel Mayhem/Your Buddy Makes More Than You.doc (45)
+   Outgoing/Corporate Espionage/Our Budget.doc matches Incoming/Budget 2007.doc (99)
+   Outgoing/Personnel Mayhem/Your Buddy Makes More Than You.doc matches Incoming/Salaries.doc (45)
+   Outgoing/Plan for Hostile Takeover.doc matches Trash/DO NOT DISTRIBUTE.doc (88)
+   Trash/DO NOT DISTRIBUTE.doc matches Outgoing/Plan for Hostile Takeover.doc (88)
+   ```

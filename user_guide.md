@@ -209,7 +209,7 @@ ssdeep is a tool that allows you to get a fuzzy hash of a file. This allows you 
    - 💡 example command
 
    ``` bash
-   ssdeep_compare_urls.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg
+   /install/ramsafe/bin/ssdeep_compare_urls.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club.jpg
    ```
 
 3. 📁 **ssdeep_compare_file** is a script that lets you compare two images in a friendly manner given two files. The higher the number in parentheses the closer the two files are. This is between 0 and 100. Because of inexact nature of fuzzy hashing, note that just because ssdeep indicates that two files match, it does not mean that those files are related. You should examine every pair of matching files individually to see how well they correspond. See See [paper](https://www.sciencedirect.com/science/article/pii/S1742287606000764?via%3Dihub) for detail on matching score
@@ -217,7 +217,7 @@ ssdeep is a tool that allows you to get a fuzzy hash of a file. This allows you 
    - 💡 example command
 
    ``` bash
-   ssdeep_compare_files.sh ../images/italy-garda-lake-sailing-club.jpg ../images/italy-garda-lake-sailing-club_modified.jpg
+   /install/ramsafe/bin/ssdeep_compare_files.sh ../images/italy-garda-lake-sailing-club.jpg ../images/italy-garda-lake-sailing-club_modified.jpg
    ```
 
 4. 📂 **Comparing multiple directories of images:**

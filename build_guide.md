@@ -33,7 +33,7 @@ If you are interested in the user guide please go to the [User Guide](user_guide
 7. ⚙️ Press Next, Press Customize, Get to the virtual environment terminal and type the following
 
     ```bash
-    sudo apt update && sudo apt upgrade -y && apt install git -y && mkdir /install && cd /install && git clone https://github.com/SteveBattista/RAMSAFE.git && cd RAMSAFE/bin && install_script.sh
+    sudo apt update && sudo apt upgrade -y && apt install git -y && mkdir /install && cd /install && git clone https://github.com/SteveBattista/RAMSAFE.git && cd RAMSAFE/bin && ./install_script.sh
     ```
 
     🔧 This will install all of the RAMSAFE specific items needed

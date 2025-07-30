@@ -78,7 +78,7 @@ Run this inside of a terminal. This tool creates a summary for a url you specify
 - 💡 example command
 
 ```bash
-/install/ramsafe/bin/summary_url.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club-225.jpg
+ summary_url.sh https://www.geoimgr.com/images/samples/italy-garda-lake-sailing-club-225.jpg
 ```
 
 - 📄 output: [summary output](summary_url.sh.md)
@@ -94,7 +94,7 @@ It asks you for the following:
 - 💡 example command
 
 ```bash
-/install/ramsafe/bin/summary_file.sh ../images/italy-garda-lake-sailing-club.jpg
+ summary_file.sh ../images/italy-garda-lake-sailing-club.jpg
 ```
 
 - 📄 click on the link to find the script [summary file](summary_file.sh.md)

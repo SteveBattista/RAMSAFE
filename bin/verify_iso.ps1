@@ -68,6 +68,8 @@ $defaultExpected = "121167d6b7c5375cd898c717edd8cb289385367ef8aeda13bf4ed095b706
 if ([string]::IsNullOrEmpty($Hash)) {
     $expected = $defaultExpected
     Write-Host "[INFO] Using default RAMSAFE hash for verification" -ForegroundColor Cyan
+    Write-Host "[WARNING] Always double check the expected hash value from an official source." -ForegroundColor Yellow
+    Write-Host "          Do not trust this script's built-in hash unless you have verified it yourself." -ForegroundColor Yellow
 } else {
     $expected = $Hash.ToLower()
     Write-Host "[INFO] Using custom hash for verification" -ForegroundColor Cyan

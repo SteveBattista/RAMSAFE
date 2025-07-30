@@ -80,9 +80,12 @@ if [ -z "$iso_path" ]; then
 fi
 
 # Use default hash if none specified
+
 if [ -z "$expected" ]; then
     expected="$default_expected"
     echo "💡 Using default RAMSAFE hash for verification"
+    echo "⚠️  WARNING: Always double check the expected hash value from an official source."
+    echo "   Do not trust this script's built-in hash unless you have verified it yourself."
 else
     echo "🔧 Using custom hash for verification"
 fi

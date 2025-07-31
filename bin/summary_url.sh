@@ -159,14 +159,13 @@ echo "📋 Please provide the following information for the forensic report:"
 echo ""
 
 # Get examiner identification (for chain of custody)
-read -pr "👤 Enter examiner identifier (name, badge, email): " examiner_identifier
 while [ -z "$examiner_identifier" ]; do
     echo "⚠️ Examiner identification is required for evidence documentation."
-    read -pr "👤 Enter examiner identifier (name, badge, email): " examiner_identifier
+    read -p "👤 Enter examiner identifier (name, badge, email): " examiner_identifier
 done
 
 # Get any additional notes about the analysis
-read -pr "📝 Enter analysis notes (optional): " file_notes
+read -p "📝 Enter analysis notes (optional): " file_notes
 
 echo ""
 echo "📊========================================="

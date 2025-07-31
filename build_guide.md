@@ -52,6 +52,8 @@ If you are interested in the user guide please go to the [User Guide](user_guide
 
 14. 🔥 Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load RAMSAFE .iso to a USB
 
+    - Note: when using Rufus, select the DD option.
+
 15. 🎉 You now have a useable Live USB item! 🚀
 
 Note: If you make a new iso, it won't have the same hash as the default downloaded one. Therefore if you are going to check the hash you need to check against your new hash for changes.

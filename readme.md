@@ -11,7 +11,7 @@
 ## 🚀 If using pre-constructed ramsafe.iso and you need to make a bootable USB
 
 1. 🛒 Purchase a USB drive of at least 8GB.
-2. ⬇️ Download RAMSAFE from [Not Downloadable yet](https://ramsafe.org), 🔐 SHA256 hash of .iso is  `803021389377e32d40125b1f80c785f79ea5244b2c24d43224e33c579866c244` (This build guide works but there is not a site for storage. Contact NCPTF for a copy)
+2. ⬇️ Download RAMSAFE from [Not Downloadable yet](https://ramsafe.org), 🔐 SHA256 hash of .iso is  `b975e776538b80152e0f1b1293e39b674821c1beb4fd9e2088c932ccbbb39105` (This build guide works but there is not a site for storage. Contact NCPTF for a copy)
 3. 🔐 Check the hash of the .iso to make sure it matches the expected value:
 
 **For Linux/macOS (bash):**
@@ -26,10 +26,10 @@ Option 1 - Use the verification script:
 Option 2 - Manual verification:
 
 ```bash
-echo "Expected: 803021389377e32d40125b1f80c785f79ea5244b2c24d43224e33c579866c244"
+echo "Expected: b975e776538b80152e0f1b1293e39b674821c1beb4fd9e2088c932ccbbb39105"
 CALCULATED=$(sha256sum ramsafe.iso | cut -d' ' -f1)
 echo "Calculated: $CALCULATED"
-if [ "$CALCULATED" = "803021389377e32d40125b1f80c785f79ea5244b2c24d43224e33c579866c244" ]; then
+if [ "$CALCULATED" = "b975e776538b80152e0f1b1293e39b674821c1beb4fd9e2088c932ccbbb39105" ]; then
     echo "✅ VERIFICATION PASSED - ISO is authentic"
 else
     echo "❌ VERIFICATION FAILED - DO NOT USE THIS ISO"
@@ -54,7 +54,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Option 2 - Manual verification:
 
 ```powershell
-$expected = "803021389377e32d40125b1f80c785f79ea5244b2c24d43224e33c579866c244"
+$expected = "b975e776538b80152e0f1b1293e39b674821c1beb4fd9e2088c932ccbbb39105"
 $calculated = (Get-FileHash "ramsafe.iso").Hash.ToLower()
 Write-Host "Expected: $expected"
 Write-Host "Calculated: $calculated"

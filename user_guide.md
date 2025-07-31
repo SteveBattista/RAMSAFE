@@ -6,7 +6,7 @@ If you are interested in building this environment please go here [Build Guide](
 ## ⚡ Quick User guide
 
 1. 🛒 Purchase a USB drive of at least 8GB.
-2. ⬇️ Download RAMSAFE from [Not Downloadable yet](https://ramsafe.org), 🔐 SHA256 hash of .iso is  `803021389377e32d40125b1f80c785f79ea5244b2c24d43224e33c579866c244` (This build guide works but there is not a site for storage. Contact NCPTF for a copy)
+2. ⬇️ Download RAMSAFE from [Not Downloadable yet](https://ramsafe.org), 🔐 SHA256 hash of .iso is  `b975e776538b80152e0f1b1293e39b674821c1beb4fd9e2088c932ccbbb39105` (This build guide works but there is not a site for storage. Contact NCPTF for a copy)
 3. 🔌 Plug in USB drive,
 4. 🔥 Use a tool like [RUFUS](https://rufus.ie/en/) if you are in Windows or Startup Disk Creator for Linux (this may require an install of new software in Ubuntu) to load the RAMSAFE.iso to USB.
 5. 🔄 Reboot machine.

@@ -62,7 +62,7 @@ if ([string]::IsNullOrEmpty($IsoPath)) {
 }
 
 # Default expected SHA256 hash for authentic RAMSAFE ISO
-$defaultExpected = "b975e776538b80152e0f1b1293e39b674821c1beb4fd9e2088c932ccbbb39105"
+$defaultExpected = "2d2348d3aeca13fa4741e708ba80a31bcde58417683af945aa6da3d38e0bdb02"
 
 # Use custom hash if provided, otherwise use default
 if ([string]::IsNullOrEmpty($Hash)) {

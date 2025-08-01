@@ -23,7 +23,7 @@
 set -e
 
 # Default expected SHA256 hash for authentic RAMSAFE ISO
-default_expected="b975e776538b80152e0f1b1293e39b674821c1beb4fd9e2088c932ccbbb39105"
+default_expected="2d2348d3aeca13fa4741e708ba80a31bcde58417683af945aa6da3d38e0bdb02"
 expected=""
 iso_path=""
 
@@ -38,7 +38,7 @@ show_usage() {
     echo "📝 Examples:"
     echo "  $0 ~/Downloads/ramsafe.iso"
     echo "  $0 --hash abc123def456... ~/Downloads/custom.iso"
-    echo "  $0 -h b975e776538b80152e0f1b1293e39b674821c1beb4fd9e2088c932ccbbb39105 ~/Downloads/ramsafe.iso"
+    echo "  $0 -h 2d2348d3aeca13fa4741e708ba80a31bcde58417683af945aa6da3d38e0bdb02 ~/Downloads/ramsafe.iso"
     echo ""
     echo "🔍 This script verifies the SHA256 hash of an ISO file."
 }

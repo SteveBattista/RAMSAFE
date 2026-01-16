@@ -91,3 +91,28 @@ Please go to the [User Guide](user_guide.md) 🛠️
 ## 🔨 Full Build Guide
 
 Please go to the [Build Guide](build_guide.md) 📋
+
+## 🔧 Troubleshooting Guide
+
+Encountering issues? Check our comprehensive [Troubleshooting Guide](TROUBLESHOOTING.md) for:
+
+- Common error solutions
+- Input validation problems
+- Network and download issues
+- Dependency problems
+- Performance optimization
+- Error code reference
+
+## 🧪 Testing
+
+Run the test suite to verify RAMSAFE functionality:
+```bash
+# Run all tests
+./tests/run_tests.sh
+
+# Install bats testing framework if needed
+./tests/run_tests.sh --install-bats
+
+# Run tests with verbose output
+./tests/run_tests.sh --verbose
+```

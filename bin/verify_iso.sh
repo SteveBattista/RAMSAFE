@@ -19,8 +19,8 @@
 #   ./verify_iso.sh --hash abc123... ~/Downloads/custom.iso
 #
 
-# Exit on any error for safer script execution
-set -e
+# Load RAMSAFE utility library
+source "$(dirname "${BASH_SOURCE[0]}")/ramsafe_utils.sh"
 
 # Default expected SHA256 hash for authentic RAMSAFE ISO
 default_expected="2d2348d3aeca13fa4741e708ba80a31bcde58417683af945aa6da3d38e0bdb02"
@@ -52,20 +52,16 @@ while [[ $# -gt 0 ]]; do
             ;;
         --help)
             show_usage
-            exit 0
+            exit $EXIT_SUCCESS
             ;;
         -*)
-            echo "❌ ERROR: Unknown option $1"
-            show_usage
-            exit 1
+            die $EXIT_INVALID_ARGS "Unknown option: $1"
             ;;
         *)
             if [ -z "$iso_path" ]; then
                 iso_path="$1"
             else
-                echo "❌ ERROR: Multiple file paths provided"
-                show_usage
-                exit 1
+                die $EXIT_INVALID_ARGS "Multiple file paths provided"
             fi
             shift
             ;;
@@ -76,41 +72,26 @@ done
 if [ -z "$iso_path" ]; then
     echo "❌ ERROR: No ISO file path provided."
     show_usage
-    exit 1
+    exit $EXIT_INVALID_ARGS
 fi
 
 # Use default hash if none specified
-
 if [ -z "$expected" ]; then
     expected="$default_expected"
-    echo "💡 Using default RAMSAFE hash for verification"
-    echo "⚠️  WARNING: Always double check the expected hash value from an official source."
-    echo "   Do not trust this script's built-in hash unless you have verified it yourself."
+    log_info "Using default RAMSAFE hash for verification"
+    log_warn "Always double check the expected hash value from an official source."
 else
-    echo "🔧 Using custom hash for verification"
+    log_info "Using custom hash for verification"
 fi
 
-# Check if the file exists and is readable
-if [ ! -f "$iso_path" ]; then
-    echo "❌ ERROR: File not found or not readable: $iso_path"
-    echo "Please check the file path and try again."
-    exit 1
-fi
+# Validate the ISO file path
+iso_path=$(validate_file_path "$iso_path")
 
-# Check if sha256sum is available
-if ! command -v sha256sum &> /dev/null; then
-    echo "❌ ERROR: sha256sum command not found."
-    echo "Please install the coreutils package or use a different verification method."
-    exit 1
-fi
+# Check dependencies
+check_dependencies "sha256sum"
 
-# Validate hash format (should be 64 hexadecimal characters)
-if ! echo "$expected" | grep -qE '^[a-fA-F0-9]{64}$'; then
-    echo "❌ ERROR: Invalid hash format"
-    echo "Expected SHA256 hash should be 64 hexadecimal characters"
-    echo "Provided: $expected"
-    exit 1
-fi
+# Validate hash format
+expected=$(validate_hash "$expected" "sha256")
 
 echo "🔍 Verifying ISO integrity..."
 echo "📁 File: $iso_path"
@@ -123,12 +104,12 @@ echo "🧮 Calculated: $calculated"
 
 # Compare the calculated hash with the expected hash
 if [ "$calculated" = "$expected" ]; then
-    echo "✅ VERIFICATION PASSED - ISO is authentic and safe to use"
-    echo "🚀 You can proceed with creating the RAMSAFE USB drive"
-    exit 0
+    log_info "VERIFICATION PASSED - ISO is authentic and safe to use"
+    log_info "You can proceed with creating the RAMSAFE USB drive"
+    exit $EXIT_SUCCESS
 else
-    echo "❌ VERIFICATION FAILED - DO NOT USE THIS ISO"
-    echo "⚠️  The file may be corrupted or tampered with"
-    echo "💡 Please re-download the ISO from the official source"
-    exit 1
+    log_error "VERIFICATION FAILED - DO NOT USE THIS ISO"
+    log_error "The file may be corrupted or tampered with"
+    log_error "Please re-download the ISO from the official source"
+    exit $EXIT_VALIDATION_FAILED
 fi

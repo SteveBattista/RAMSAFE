@@ -20,6 +20,10 @@
 # All matches should be manually examined for verification.
 #
 
+# Load RAMSAFE utility library
+# shellcheck disable=SC1091
+source "$(dirname "${BASH_SOURCE[0]}")/ramsafe_utils.sh"
+
 # Ensure exactly two arguments are provided
 if [ "$#" -ne 2 ]; then
     echo "❌ ERROR: Incorrect number of arguments provided."
@@ -31,53 +35,36 @@ if [ "$#" -ne 2 ]; then
     echo ""
     echo "🔍 This tool compares two files using fuzzy hashing to detect similarity."
     echo "📊 Output shows a similarity score from 0 (completely different) to 100 (identical)."
-    exit 1
+    exit $EXIT_INVALID_ARGS
 fi
 
-# Verify ssdeep is installed and available
-if ! command -v ssdeep &> /dev/null; then
-    echo "❌ ERROR: ssdeep tool not found."
-    echo "🔧 ssdeep is required for fuzzy hash comparison but is not installed."
-    echo "💡 Please install ssdeep to use this script:"
-    echo "  sudo apt install ssdeep"
-    exit 1
-fi
+# Check dependencies
+check_dependencies "ssdeep"
 
-# Store input file paths
-file1="$1"
-file2="$2"
-
-# Verify both input files exist and are readable
-if [ ! -f "$file1" ]; then
-    echo "❌ ERROR: First file does not exist or is not readable: $file1"
-    exit 1
-fi
-
-if [ ! -f "$file2" ]; then
-    echo "❌ ERROR: Second file does not exist or is not readable: $file2"
-    exit 1
-fi
+# Validate input file paths
+file1=$(validate_file_path "$1")
+file2=$(validate_file_path "$2")
 
 # Display what we're comparing for user confirmation
-echo "🔍 Comparing files using ssdeep fuzzy hashing:"
-echo "  📁 File 1: $file1"
-echo "  📁 File 2: $file2"
+log_info "Comparing files using ssdeep fuzzy hashing:"
+log_info "  File 1: $file1"
+log_info "  File 2: $file2"
 echo ""
 
 # Perform the fuzzy hash comparison
 # The -d flag tells ssdeep to compare the files and show similarity score
 # Output format: "file1 matches file2 (score)" where score is 0-100
-echo "📊 Fuzzy hash comparison result:"
+log_info "Fuzzy hash comparison result:"
 ssdeep -d "$file1" "$file2"
 
 echo ""
-echo "📈 Interpretation:"
-echo "  🔴 0-25:   Files are very different"  
-echo "  🟡 26-50:  Files have some similarities"
-echo "  🟠 51-75:  Files are quite similar"
-echo "  🟢 76-99:  Files are very similar" 
-echo "  ✅ 100:    Files are identical"
+log_info "Interpretation:"
+log_info "  🔴 0-25:   Files are very different"  
+log_info "  🟡 26-50:  Files have some similarities"
+log_info "  🟠 51-75:  Files are quite similar"
+log_info "  🟢 76-99:  Files are very similar" 
+log_info "  ✅ 100:    Files are identical"
 echo ""
-echo "⚠️ NOTE: Similarity does not guarantee the files are related."
-echo "🔍 Manual examination is required to verify any potential matches."
+log_warn "Similarity does not guarantee the files are related."
+log_warn "Manual examination is required to verify any potential matches."
 

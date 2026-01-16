@@ -10,13 +10,16 @@
         "Dload",
         "exif",
         "exiftool",
+        "filesize",
         "Flashpix",
         "GPSDOP",
         "gsettings",
         "Hyperfocal",
         "JFIF",
+        "mktemp",
         "NCPTF",
         "RAMSAFE",
+        "redir",
         "Sazep",
         "shotwell",
         "skel",
@@ -25,5 +28,16 @@
         "UEFI",
         "Xferd",
         "YEPW"
-    ]
+    ],
+    "chat.tools.terminal.autoApprove": {
+        "./bin/summary_file.sh": true,
+        "/^cd /home/complier/projects/tools/RAMSAFE && bash -c 'source bin/ramsafe_utils\\.sh; validate_file_path \"test_file\\.txt\"'$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd /home/complier/projects/tools/RAMSAFE && bash -c 'source bin/ramsafe_utils\\.sh; RAMSAFE_LOG_LEVEL=4; validate_file_path \"\\./test_file\\.txt\"'$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
 }

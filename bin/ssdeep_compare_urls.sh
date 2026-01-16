@@ -22,8 +22,8 @@
 # - Detect modified versions of files distributed online
 #
 
-# Exit on any error for safer script execution  
-set -e
+# Load RAMSAFE utility library
+source "$(dirname "${BASH_SOURCE[0]}")/ramsafe_utils.sh"
 
 # Ensure exactly two arguments are provided
 if [ "$#" -ne 2 ]; then
@@ -36,89 +36,50 @@ if [ "$#" -ne 2 ]; then
     echo ""
     echo "🌐 This tool downloads files from two URLs and compares them using"
     echo "🔍 fuzzy hashing to detect similarity between the files."
-    exit 1
+    exit $EXIT_INVALID_ARGS
 fi
 
-# Verify required tools are installed
-if ! command -v ssdeep &> /dev/null; then
-    echo "❌ ERROR: ssdeep tool not found."
-    echo "🔧 ssdeep is required for fuzzy hash comparison but is not installed."
-    echo "💡 Please install ssdeep to use this script:"
-    echo "  sudo apt install ssdeep"
-    exit 1
-fi
+# Check dependencies
+check_dependencies "ssdeep" "curl"
 
-if ! command -v curl &> /dev/null; then
-    echo "❌ ERROR: curl tool not found."
-    echo "🌐 curl is required for downloading files but is not installed."
-    echo "💡 Please install curl to use this script:"
-    echo "  sudo apt install curl"
-    exit 1
-fi
-
-# Store input URLs
-url1="$1"
-url2="$2"
+# Validate input URLs
+url1=$(validate_url "$1")
+url2=$(validate_url "$2")
 
 # Create secure temporary files for downloads
-# These will be automatically cleaned up on script exit
-file_one=$(mktemp)
-file_two=$(mktemp)
+file_one=$(create_temp_file)
+file_two=$(create_temp_file)
 
 # Set up cleanup function to securely remove temporary files
 cleanup() {
-    echo "🧹 Cleaning up temporary files..."
-    # Use shred to securely overwrite temporary files before deletion
-    # This prevents recovery of potentially sensitive evidence
-    if [ -f "$file_one" ]; then
-        shred -f -z -u "$file_one" 2>/dev/null || rm -f "$file_one"
-    fi
-    if [ -f "$file_two" ]; then
-        shred -f -z -u "$file_two" 2>/dev/null || rm -f "$file_two"
-    fi
+    log_info "Cleaning up temporary files..."
+    secure_delete "$file_one"
+    secure_delete "$file_two"
 }
 
 # Ensure cleanup happens even if script is interrupted
 trap cleanup EXIT
 
-echo "🌐 Downloading and comparing files from URLs:"
-echo "  🔗 URL 1: $url1"  
-echo "  🔗 URL 2: $url2"
+log_info "Downloading and comparing files from URLs:"
+log_info "  URL 1: $url1"  
+log_info "  URL 2: $url2"
 echo ""
 
 # Download the first file from URL
-echo "⬇️ Downloading first file from: $url1"
-if ! curl -L -f -s -S -o "$file_one" "$url1"; then
-    echo "❌ ERROR: Failed to download first file from: $url1"
-    echo "🔍 Please verify the URL is correct and accessible."
-    exit 1
-fi
+log_info "Downloading first file from: $url1"
+secure_download "$url1" "$file_one"
 
 # Verify first file was downloaded successfully
-if [ ! -f "$file_one" ] || [ ! -s "$file_one" ]; then
-    echo "❌ ERROR: First file download failed or resulted in empty file."
-    echo "🔗 URL: $url1"
-    exit 1
-fi
-
-echo "✅ First file downloaded successfully ($(stat -c%s "$file_one") bytes)"
+file_size=$(stat -f%z "$file_one" 2>/dev/null || stat -c%s "$file_one" 2>/dev/null)
+log_info "First file downloaded successfully ($file_size bytes)"
 
 # Download the second file from URL  
-echo "⬇️ Downloading second file from: $url2"
-if ! curl -L -f -s -S -o "$file_two" "$url2"; then
-    echo "❌ ERROR: Failed to download second file from: $url2"  
-    echo "🔍 Please verify the URL is correct and accessible."
-    exit 1
-fi
+log_info "Downloading second file from: $url2"
+secure_download "$url2" "$file_two"
 
 # Verify second file was downloaded successfully
-if [ ! -f "$file_two" ] || [ ! -s "$file_two" ]; then
-    echo "❌ ERROR: Second file download failed or resulted in empty file."
-    echo "🔗 URL: $url2"
-    exit 1
-fi
-
-echo "✅ Second file downloaded successfully ($(stat -c%s "$file_two") bytes)"
+file_size=$(stat -f%z "$file_two" 2>/dev/null || stat -c%s "$file_two" 2>/dev/null)
+log_info "Second file downloaded successfully ($file_size bytes)"
 echo ""
 
 # Perform fuzzy hash comparison

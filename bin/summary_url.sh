@@ -28,8 +28,8 @@
 # LEGAL USE: Output suitable for court documentation and chain of custody
 #
 
-# Exit on any error for safer script execution
-set -e
+# Load RAMSAFE utility library
+source "$(dirname "${BASH_SOURCE[0]}")/ramsafe_utils.sh"
 
 # Ensure exactly one argument is provided  
 if [ "$#" -ne 1 ]; then
@@ -43,36 +43,14 @@ if [ "$#" -ne 1 ]; then
     echo ""
     echo "🌐 This tool downloads a file from the specified URL and generates"
     echo "📊 a comprehensive forensic analysis report in JSON format."
-    exit 1
+    exit $EXIT_INVALID_ARGS
 fi
 
-# Store the input URL
-url="$1"
+# Validate and store the input URL
+url=$(validate_url "$1")
 
 # Verify required tools are installed
-if ! command -v jq &> /dev/null; then
-    echo "❌ ERROR: jq tool not found."
-    echo "🔧 jq is required for JSON processing but is not installed."
-    echo "💡 Please install jq to use this script:"
-    echo "  sudo apt install jq"
-    exit 1
-fi
-
-if ! command -v curl &> /dev/null; then
-    echo "❌ ERROR: curl tool not found."
-    echo "🌐 curl is required for downloading files but is not installed."
-    echo "💡 Please install curl to use this script:"
-    echo "  sudo apt install curl"
-    exit 1
-fi
-
-if ! command -v ssdeep &> /dev/null; then
-    echo "❌ ERROR: ssdeep tool not found."
-    echo "🔧 ssdeep is required for fuzzy hashing but is not installed."
-    echo "💡 Please install ssdeep to use this script:"
-    echo "  sudo apt install ssdeep"
-    exit 1
-fi
+check_dependencies "jq" "curl" "ssdeep" "stat" "sha256sum" "date"
 
 echo "🌐========================================="
 echo "📊 RAMSAFE URL Evidence Summary Generator"
@@ -82,39 +60,28 @@ echo "⏰ Analysis started: $(date)"
 echo ""
 
 # Create secure temporary file for download
-file=$(mktemp)
+file=$(create_temp_file)
 
 # Set up cleanup function to securely remove temporary file
 cleanup() {
-    echo "🧹 Cleaning up temporary files..."
-    if [ -f "$file" ]; then
-        # Use shred to securely overwrite the temporary file
-        # This prevents recovery of potentially sensitive evidence
-        shred -f -z -u "$file" 2>/dev/null || rm -f "$file"
-    fi
+    log_info "Cleaning up temporary files..."
+    secure_delete "$file"
 }
 
 # Ensure cleanup happens even if script is interrupted
 trap cleanup EXIT
 
 # Download the file from the URL
-echo "⬇️ Downloading file from URL..."
-echo "🔗 Source: $url"
-
-if ! curl -L -f -s -S -o "$file" "$url"; then
-    echo "❌ ERROR: Failed to download file from URL: $url"
-    echo "🔍 Please verify the URL is correct and accessible."
-    exit 1
-fi
+log_info "Downloading file from URL: $url"
+secure_download "$url" "$file"
 
 # Verify file was downloaded successfully
 if [ ! -f "$file" ] || [ ! -s "$file" ]; then
-    echo "❌ ERROR: File download failed or resulted in empty file."
-    echo "🔗 URL: $url"
-    exit 1
+    die $EXIT_NETWORK_ERROR "File download failed or resulted in empty file from: $url"
 fi
 
-echo "✅ File downloaded successfully ($(stat -c%s "$file") bytes)"
+file_size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null)
+log_info "File downloaded successfully ($file_size bytes)"
 
 # Get HTTP headers for additional evidence
 echo "📡 Retrieving HTTP headers..."
@@ -159,13 +126,25 @@ echo "📋 Please provide the following information for the forensic report:"
 echo ""
 
 # Get examiner identification (for chain of custody)
-while [ -z "$examiner_identifier" ]; do
-    echo "⚠️ Examiner identification is required for evidence documentation."
+while true; do
     read -p "👤 Enter examiner identifier (name, badge, email): " examiner_identifier
+    if [ -n "$examiner_identifier" ]; then
+        if examiner_identifier=$(validate_examiner_id "$examiner_identifier" 2>/dev/null); then
+            break
+        else
+            echo "⚠️ Invalid examiner identifier format."
+        fi
+    else
+        echo "⚠️ Examiner identification is required for evidence documentation."
+    fi
 done
 
 # Get any additional notes about the analysis
 read -p "📝 Enter analysis notes (optional): " file_notes
+# Basic validation for notes (prevent injection)
+if [ -n "$file_notes" ] && [[ "$file_notes" == *$'\0'* ]]; then
+    die $EXIT_SECURITY_VIOLATION "Analysis notes contain null bytes"
+fi
 
 echo ""
 echo "📊========================================="

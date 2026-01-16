@@ -23,8 +23,8 @@
 # LEGAL USE: Output suitable for court documentation and chain of custody
 #
 
-# Exit on any error for safer script execution
-set -e
+# Load RAMSAFE utility library
+source "$(dirname "${BASH_SOURCE[0]}")/ramsafe_utils.sh"
 
 # Ensure exactly one argument is provided
 if [ "$#" -ne 1 ]; then
@@ -38,35 +38,14 @@ if [ "$#" -ne 1 ]; then
     echo ""
     echo "📊 This tool generates a comprehensive forensic analysis report"
     echo "🗂️ for the specified file in JSON format."
-    exit 1
+    exit $EXIT_INVALID_ARGS
 fi
 
-# Store the input file path
-file="$1"
-
-# Verify the file exists and is readable
-if [ ! -f "$file" ]; then
-    echo "❌ ERROR: File not found or not accessible: $file"
-    echo "🔍 Please verify the file path is correct and the file exists."
-    exit 1
-fi
+# Validate and store the input file path
+file=$(validate_file_path "$1")
 
 # Verify required tools are installed
-if ! command -v jq &> /dev/null; then
-    echo "❌ ERROR: jq tool not found."
-    echo "🔧 jq is required for JSON processing but is not installed."
-    echo "💡 Please install jq to use this script:"
-    echo "  sudo apt install jq"
-    exit 1
-fi
-
-if ! command -v ssdeep &> /dev/null; then
-    echo "❌ ERROR: ssdeep tool not found."
-    echo "🔧 ssdeep is required for fuzzy hashing but is not installed."
-    echo "💡 Please install ssdeep to use this script:"
-    echo "  sudo apt install ssdeep"
-    exit 1
-fi
+check_dependencies "jq" "ssdeep" "stat" "sha256sum" "date"
 
 echo "🔍========================================="
 echo "📊 RAMSAFE File Evidence Summary Generator"
@@ -122,21 +101,39 @@ echo "📋 Please provide the following information for the forensic report:"
 echo ""
 
 # Get source URL where file was obtained (important for provenance)
-read -p "🔗 Enter the source URL where this file was obtained: " file_link
-while [ -z "$file_link" ]; do
-    echo "⚠️ Source URL is required for evidence documentation."
+while true; do
     read -p "🔗 Enter the source URL where this file was obtained: " file_link
+    if [ -n "$file_link" ]; then
+        if file_link=$(validate_url "$file_link" 2>/dev/null); then
+            break
+        else
+            echo "⚠️ Invalid URL format. Please enter a valid HTTP/HTTPS URL."
+        fi
+    else
+        echo "⚠️ Source URL is required for evidence documentation."
+    fi
 done
 
 # Get examiner identification (for chain of custody)
-read -p "👤 Enter examiner identifier (name, badge, email): " examiner_identifier
-while [ -z "$examiner_identifier" ]; do
-    echo "⚠️ Examiner identification is required for evidence documentation."
+while true; do
     read -p "👤 Enter examiner identifier (name, badge, email): " examiner_identifier
+    if [ -n "$examiner_identifier" ]; then
+        if examiner_identifier=$(validate_examiner_id "$examiner_identifier" 2>/dev/null); then
+            break
+        else
+            echo "⚠️ Invalid examiner identifier format."
+        fi
+    else
+        echo "⚠️ Examiner identification is required for evidence documentation."
+    fi
 done
 
 # Get any additional notes about the analysis
 read -p "📝 Enter analysis notes (optional): " file_notes
+# Basic validation for notes (prevent injection)
+if [ -n "$file_notes" ] && [[ "$file_notes" == *$'\0'* ]]; then
+    die $EXIT_SECURITY_VIOLATION "Analysis notes contain null bytes"
+fi
 
 echo ""
 echo "📊========================================="

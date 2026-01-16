@@ -101,15 +101,20 @@ It asks you for the following:
 
 #### 🔍 Exiftool
 
-Run this inside of a terminal. This lists any meta-data included in the image. This can be used to find GPS coordinates or images that have the same characteristics that might have been taken with the same type of camera. Many websites strip this things like GPS out of the images. RAMSAFE includes a sample image. rTo test this type the following:
+Run this inside of a terminal. This lists any meta-data included in the image. This can be used to find GPS coordinates or images that have the same characteristics that might have been taken with the same type of camera. Many websites strip this things like GPS out of the images. RAMSAFE includes a sample image. To test this type the following:
 
 - 💡 example command:
 
 ```bash
-exiftool -j ~/Downloads/italy-garda-lake-sailing-club.jpg`
+exiftool -j ~/Downloads/italy-garda-lake-sailing-club.jpg
 ```
 
-- 📄 [output](exiftool_output)
+- 📄 [output](exiftool_output.md)
+
+**Common Issues:**
+- If you get "command not found", install with: `sudo apt install exiftool`
+- For permission errors, check file ownership: `ls -la filename.jpg`
+- See [Troubleshooting Guide](TROUBLESHOOTING.md) for more solutions
 
 ### 📏 Exact size
 
@@ -231,10 +236,56 @@ ssdeep is a tool that allows you to get a fuzzy hash of a file. This allows you 
    - 📄 output
 
    ```text
-   Incoming/Budget 2007.doc matches Outgoing/Corporate Espionage/Our Budget.doc (99)
-   Incoming/Salaries.doc matches Outgoing/Personnel Mayhem/Your Buddy Makes More Than You.doc (45)
    Outgoing/Corporate Espionage/Our Budget.doc matches Incoming/Budget 2007.doc (99)
    Outgoing/Personnel Mayhem/Your Buddy Makes More Than You.doc matches Incoming/Salaries.doc (45)
    Outgoing/Plan for Hostile Takeover.doc matches Trash/DO NOT DISTRIBUTE.doc (88)
    Trash/DO NOT DISTRIBUTE.doc matches Outgoing/Plan for Hostile Takeover.doc (88)
    ```
+
+---
+
+## 🔧 Troubleshooting Common Issues
+
+### Script Permission Errors
+If you get "Permission denied" errors:
+```bash
+chmod +x /install/RAMSAFE/bin/*.sh
+```
+
+### Missing Dependencies
+If tools are "not found":
+```bash
+# Check if tools are installed
+which jq ssdeep exiftool curl
+
+# Install missing tools
+sudo apt install jq ssdeep exiftool curl
+```
+
+### Network Download Problems
+- Verify URL is accessible in Firefox first
+- Check internet connection: `ping google.com`
+- Some sites may block automated downloads
+
+### File Analysis Issues
+- Ensure files are readable: `ls -la filename.jpg`
+- Check file isn't corrupted: try opening in image viewer
+- For large files, processing may take several minutes
+
+### 📚 Complete Troubleshooting Guide
+For comprehensive error solutions, see: [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+
+### 🧪 Testing Your Setup
+Verify RAMSAFE is working correctly:
+```bash
+# Run built-in tests
+/install/RAMSAFE/tests/run_tests.sh
+```
+
+---
+
+**⚠️ Important Reminders:**
+- All work in RAMSAFE is stored in RAM only
+- Save reports before shutting down - nothing persists after reboot
+- If you encounter errors, check the troubleshooting guide first
+- Contact your IT department for persistent technical issues

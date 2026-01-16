@@ -22,9 +22,6 @@ setup() {
     
     # Set up PATH to include our bin directory
     export PATH="$BATS_TEST_DIRNAME/../bin:$PATH"
-    
-    # Create a mock HTTP server response for testing
-    MOCK_URL="https://httpbin.org/status/200"
 }
 
 # Cleanup test environment

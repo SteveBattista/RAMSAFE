@@ -112,6 +112,7 @@ exiftool -j ~/Downloads/italy-garda-lake-sailing-club.jpg
 - 📄 [output](exiftool_output.md)
 
 **Common Issues:**
+
 - If you get "command not found", install with: `sudo apt install exiftool`
 - For permission errors, check file ownership: `ls -la filename.jpg`
 - See [Troubleshooting Guide](TROUBLESHOOTING.md) for more solutions
@@ -132,7 +133,7 @@ stat --format=%s ~/Downloads/italy-garda-lake-sailing-club.jpg
 
 #### 🔐 Standard Hashes
 
-These are all run within a terminal. They provide a fixed string that under most circumstances are unique for identification for a file. If one bit in the image changes, the hash changes. Therefore two similar looking images will have unique hashes The longer the hash in bit size, the higher the probability that it will be unique. In the case of a 256 bit hash matching another file is 1/(256<sup>2</sup>). This is incredibly small. Any change has a 50% chance of changing any bit in the result.
+These are all run within a terminal. They provide a fixed string that under most circumstances are unique for identification for a file. If one bit in the image changes, the hash changes. Therefore two similar looking images will have unique hashes The longer the hash in bit size, the higher the probability that it will be unique. In the case of a 256 bit hash matching another file is 1/(256^2). This is incredibly small. Any change has a 50% chance of changing any bit in the result.
 
 1. 🔸 **MD5**: a 128-bit (32-character hexadecimal) hash value from any input data. MD5 is no longer considered secure for cryptographic purposes due to vulnerabilities to collisions (different inputs producing the same hash).
 
@@ -247,13 +248,17 @@ ssdeep is a tool that allows you to get a fuzzy hash of a file. This allows you 
 ## 🔧 Troubleshooting Common Issues
 
 ### Script Permission Errors
+
 If you get "Permission denied" errors:
+
 ```bash
 chmod +x /install/RAMSAFE/bin/*.sh
 ```
 
 ### Missing Dependencies
+
 If tools are "not found":
+
 ```bash
 # Check if tools are installed
 which jq ssdeep exiftool curl
@@ -263,20 +268,25 @@ sudo apt install jq ssdeep exiftool curl
 ```
 
 ### Network Download Problems
+
 - Verify URL is accessible in Firefox first
 - Check internet connection: `ping google.com`
 - Some sites may block automated downloads
 
 ### File Analysis Issues
+
 - Ensure files are readable: `ls -la filename.jpg`
 - Check file isn't corrupted: try opening in image viewer
 - For large files, processing may take several minutes
 
 ### 📚 Complete Troubleshooting Guide
+
 For comprehensive error solutions, see: [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
 
 ### 🧪 Testing Your Setup
+
 Verify RAMSAFE is working correctly:
+
 ```bash
 # Run built-in tests
 /install/RAMSAFE/tests/run_tests.sh
@@ -285,6 +295,7 @@ Verify RAMSAFE is working correctly:
 ---
 
 **⚠️ Important Reminders:**
+
 - All work in RAMSAFE is stored in RAM only
 - Save reports before shutting down - nothing persists after reboot
 - If you encounter errors, check the troubleshooting guide first

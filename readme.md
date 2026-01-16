@@ -1,8 +1,6 @@
 # 🛡️ RAMSAFE: RAM-based Secure Analysis Forensics Environment
 
-<div align="center">
-  <img src="ramsafe_wallpaper.ico" alt="RAMSAFE Icon">
-</div>
+![RAMSAFE Icon](ramsafe_wallpaper.ico)
 
 🎯 **For a live USB Linux distribution designed for the National Child Protection Task Force (NCPTF)**, whose primary goal is to operate entirely in memory (RAM) to prevent any child sexual abuse material (CSAM) from being written to disk, and which includes tools to help interact with images for law enforcement.
 
@@ -106,6 +104,7 @@ Encountering issues? Check our comprehensive [Troubleshooting Guide](TROUBLESHOO
 ## 🧪 Testing
 
 Run the test suite to verify RAMSAFE functionality:
+
 ```bash
 # Run all tests
 ./tests/run_tests.sh

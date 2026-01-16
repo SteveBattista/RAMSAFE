@@ -17,7 +17,7 @@
 # =============================================================================
 
 # Standardized exit codes
-readonly EXIT_SUCCESS=0
+declare -xr EXIT_SUCCESS=0
 readonly EXIT_GENERAL_ERROR=1
 readonly EXIT_INVALID_ARGS=2
 readonly EXIT_FILE_NOT_FOUND=3
@@ -51,24 +51,25 @@ RAMSAFE_LOG_LEVEL=${RAMSAFE_LOG_LEVEL:-$LOG_LEVEL_INFO}
 log_message() {
     local level=$1
     local message=$2
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    local timestamp
+    timestamp=$(date '+%Y-%m-%d %H:%M:%S')
     
-    case $level in
-        $LOG_LEVEL_ERROR)
+    case "$level" in
+        "$LOG_LEVEL_ERROR")
             echo "[$timestamp] ERROR: $message" >&2
             ;;
-        $LOG_LEVEL_WARN)
-            if [ $RAMSAFE_LOG_LEVEL -ge $LOG_LEVEL_WARN ]; then
+        "$LOG_LEVEL_WARN")
+            if [ "$RAMSAFE_LOG_LEVEL" -ge "$LOG_LEVEL_WARN" ]; then
                 echo "[$timestamp] WARN: $message" >&2
             fi
             ;;
-        $LOG_LEVEL_INFO)
-            if [ $RAMSAFE_LOG_LEVEL -ge $LOG_LEVEL_INFO ]; then
+        "$LOG_LEVEL_INFO")
+            if [ "$RAMSAFE_LOG_LEVEL" -ge "$LOG_LEVEL_INFO" ]; then
                 echo "[$timestamp] INFO: $message"
             fi
             ;;
-        $LOG_LEVEL_DEBUG)
-            if [ $RAMSAFE_LOG_LEVEL -ge $LOG_LEVEL_DEBUG ]; then
+        "$LOG_LEVEL_DEBUG")
+            if [ "$RAMSAFE_LOG_LEVEL" -ge "$LOG_LEVEL_DEBUG" ]; then
                 echo "[$timestamp] DEBUG: $message"
             fi
             ;;
@@ -76,10 +77,10 @@ log_message() {
 }
 
 # Convenience logging functions
-log_error() { log_message $LOG_LEVEL_ERROR "$1"; }
-log_warn() { log_message $LOG_LEVEL_WARN "$1"; }
-log_info() { log_message $LOG_LEVEL_INFO "$1"; }
-log_debug() { log_message $LOG_LEVEL_DEBUG "$1"; }
+log_error() { log_message "$LOG_LEVEL_ERROR" "$1"; }
+log_warn() { log_message "$LOG_LEVEL_WARN" "$1"; }
+log_info() { log_message "$LOG_LEVEL_INFO" "$1"; }
+log_debug() { log_message "$LOG_LEVEL_DEBUG" "$1"; }
 
 # =============================================================================
 # ERROR HANDLING FUNCTIONS
@@ -91,7 +92,7 @@ die() {
     local exit_code=$1
     local message=$2
     log_error "$message"
-    exit $exit_code
+    exit "$exit_code"
 }
 
 # Check if a command exists
@@ -99,7 +100,7 @@ die() {
 check_dependency() {
     local cmd=$1
     if ! command -v "$cmd" &> /dev/null; then
-        die $EXIT_DEPENDENCY_MISSING "Required dependency not found: $cmd. Please install it to continue."
+        die "$EXIT_DEPENDENCY_MISSING" "Required dependency not found: $cmd. Please install it to continue."
     fi
 }
 
@@ -123,33 +124,33 @@ validate_file_path() {
     
     # Check if path is provided
     if [ -z "$file_path" ]; then
-        die $EXIT_INVALID_ARGS "File path cannot be empty"
+        die "$EXIT_INVALID_ARGS" "File path cannot be empty"
     fi
     
     # Check path length (prevent buffer overflow attempts)
     if [ ${#file_path} -gt 4096 ]; then
-        die $EXIT_SECURITY_VIOLATION "File path too long (maximum 4096 characters)"
+        die "$EXIT_SECURITY_VIOLATION" "File path too long (maximum 4096 characters)"
     fi
     
     # Check for null bytes (security measure)
     if [ "${#file_path}" -ne "$(printf '%s' "$file_path" | wc -c)" ]; then
-        die $EXIT_SECURITY_VIOLATION "File path contains null bytes"
+        die "$EXIT_SECURITY_VIOLATION" "File path contains null bytes"
     fi
     
     # Resolve path to prevent directory traversal attacks
     local resolved_path
     if ! resolved_path=$(realpath -m "$file_path" 2>/dev/null); then
-        die $EXIT_INVALID_ARGS "Invalid file path: $file_path"
+        die "$EXIT_INVALID_ARGS" "Invalid file path: $file_path"
     fi
     
     # Check if file exists
     if [ ! -f "$resolved_path" ]; then
-        die $EXIT_FILE_NOT_FOUND "File not found: $resolved_path"
+        die "$EXIT_FILE_NOT_FOUND" "File not found: $resolved_path"
     fi
     
     # Check if file is readable
     if [ ! -r "$resolved_path" ]; then
-        die $EXIT_PERMISSION_DENIED "File not readable: $resolved_path"
+        die "$EXIT_PERMISSION_DENIED" "File not readable: $resolved_path"
     fi
     
     # Check file size
@@ -162,11 +163,11 @@ validate_file_path() {
     fi
     
     if [ -z "$file_size" ] || ! [[ "$file_size" =~ ^[0-9]+$ ]]; then
-        die $EXIT_GENERAL_ERROR "Could not determine file size"
+        die "$EXIT_GENERAL_ERROR" "Could not determine file size"
     fi
     
-    if [ "$file_size" -gt $MAX_FILE_SIZE ]; then
-        die $EXIT_VALIDATION_FAILED "File too large: $file_size bytes (maximum $MAX_FILE_SIZE bytes)"
+    if [ "$file_size" -gt "$MAX_FILE_SIZE" ]; then
+        die "$EXIT_VALIDATION_FAILED" "File too large: $file_size bytes (maximum $MAX_FILE_SIZE bytes)"
     fi
     
     log_debug "File validation passed: $resolved_path ($file_size bytes)"
@@ -180,32 +181,32 @@ validate_url() {
     
     # Check if URL is provided
     if [ -z "$url" ]; then
-        die $EXIT_INVALID_ARGS "URL cannot be empty"
+        die "$EXIT_INVALID_ARGS" "URL cannot be empty"
     fi
     
     # Check URL length
-    if [ ${#url} -gt $MAX_URL_LENGTH ]; then
-        die $EXIT_SECURITY_VIOLATION "URL too long (maximum $MAX_URL_LENGTH characters)"
+    if [ ${#url} -gt "$MAX_URL_LENGTH" ]; then
+        die "$EXIT_SECURITY_VIOLATION" "URL too long (maximum $MAX_URL_LENGTH characters)"
     fi
     
     # Check for null bytes
     if [ "${#url}" -ne "$(printf '%s' "$url" | wc -c)" ]; then
-        die $EXIT_SECURITY_VIOLATION "URL contains null bytes"
+        die "$EXIT_SECURITY_VIOLATION" "URL contains null bytes"
     fi
     
     # Basic URL format validation
     if [[ ! "$url" =~ ^https?:// ]]; then
-        die $EXIT_INVALID_ARGS "Invalid URL format. Must start with http:// or https://"
+        die "$EXIT_INVALID_ARGS" "Invalid URL format. Must start with http:// or https://"
     fi
     
     # Check for suspicious characters that might indicate injection attempts
     if [[ "$url" =~ [^a-zA-Z0-9._~:/\?#@!\$\&\'\(\)\*\+,=%|-] ]]; then
-        die $EXIT_SECURITY_VIOLATION "URL contains potentially dangerous characters"
+        die "$EXIT_SECURITY_VIOLATION" "URL contains potentially dangerous characters"
     fi
     
     # Prevent localhost/private IP access (basic protection)
     if [[ "$url" =~ ^https?://(localhost|127\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.) ]]; then
-        die $EXIT_SECURITY_VIOLATION "Access to localhost/private IPs is not allowed"
+        die "$EXIT_SECURITY_VIOLATION" "Access to localhost/private IPs is not allowed"
     fi
     
     log_debug "URL validation passed: $url"
@@ -219,7 +220,7 @@ validate_hash() {
     local type=${2:-"auto"}
     
     if [ -z "$hash" ]; then
-        die $EXIT_INVALID_ARGS "Hash cannot be empty"
+        die "$EXIT_INVALID_ARGS" "Hash cannot be empty"
     fi
     
     # Remove any whitespace
@@ -227,29 +228,29 @@ validate_hash() {
     
     # Check for valid hex characters only
     if [[ ! "$hash" =~ ^[a-fA-F0-9]+$ ]]; then
-        die $EXIT_INVALID_ARGS "Hash contains invalid characters (must be hexadecimal)"
+        die "$EXIT_INVALID_ARGS" "Hash contains invalid characters (must be hexadecimal)"
     fi
     
     # Validate hash length based on type
     case "$type" in
         "md5"|"MD5")
             if [ ${#hash} -ne 32 ]; then
-                die $EXIT_INVALID_ARGS "Invalid MD5 hash length (expected 32 characters, got ${#hash})"
+                die "$EXIT_INVALID_ARGS" "Invalid MD5 hash length (expected 32 characters, got ${#hash})"
             fi
             ;;
         "sha1"|"SHA1")
             if [ ${#hash} -ne 40 ]; then
-                die $EXIT_INVALID_ARGS "Invalid SHA1 hash length (expected 40 characters, got ${#hash})"
+                die "$EXIT_INVALID_ARGS" "Invalid SHA1 hash length (expected 40 characters, got ${#hash})"
             fi
             ;;
         "sha256"|"SHA256")
             if [ ${#hash} -ne 64 ]; then
-                die $EXIT_INVALID_ARGS "Invalid SHA256 hash length (expected 64 characters, got ${#hash})"
+                die "$EXIT_INVALID_ARGS" "Invalid SHA256 hash length (expected 64 characters, got ${#hash})"
             fi
             ;;
         "sha512"|"SHA512")
             if [ ${#hash} -ne 128 ]; then
-                die $EXIT_INVALID_ARGS "Invalid SHA512 hash length (expected 128 characters, got ${#hash})"
+                die "$EXIT_INVALID_ARGS" "Invalid SHA512 hash length (expected 128 characters, got ${#hash})"
             fi
             ;;
         "auto")
@@ -258,11 +259,11 @@ validate_hash() {
                 40) type="SHA1" ;;
                 64) type="SHA256" ;;
                 128) type="SHA512" ;;
-                *) die $EXIT_INVALID_ARGS "Unknown hash length: ${#hash} characters" ;;
+                *) die "$EXIT_INVALID_ARGS" "Unknown hash length: ${#hash} characters" ;;
             esac
             ;;
         *)
-            die $EXIT_INVALID_ARGS "Unknown hash type: $type"
+            die "$EXIT_INVALID_ARGS" "Unknown hash type: $type"
             ;;
     esac
     
@@ -276,22 +277,22 @@ validate_examiner_id() {
     local examiner_id=$1
     
     if [ -z "$examiner_id" ]; then
-        die $EXIT_INVALID_ARGS "Examiner identifier cannot be empty"
+        die "$EXIT_INVALID_ARGS" "Examiner identifier cannot be empty"
     fi
     
     # Check length (reasonable bounds)
     if [ ${#examiner_id} -gt 100 ]; then
-        die $EXIT_INVALID_ARGS "Examiner identifier too long (maximum 100 characters)"
+        die "$EXIT_INVALID_ARGS" "Examiner identifier too long (maximum 100 characters)"
     fi
     
     # Check for null bytes
     if [ "${#examiner_id}" -ne "$(printf '%s' "$examiner_id" | wc -c)" ]; then
-        die $EXIT_SECURITY_VIOLATION "Examiner identifier contains null bytes"
+        die "$EXIT_SECURITY_VIOLATION" "Examiner identifier contains null bytes"
     fi
     
     # Basic format validation (letters, numbers, spaces, common punctuation)
     if [[ ! "$examiner_id" =~ ^[a-zA-Z0-9._@\-\ ]+$ ]]; then
-        die $EXIT_INVALID_ARGS "Examiner identifier contains invalid characters"
+        die "$EXIT_INVALID_ARGS" "Examiner identifier contains invalid characters"
     fi
     
     log_debug "Examiner ID validation passed: $examiner_id"
@@ -309,7 +310,7 @@ create_temp_file() {
     local temp_file
     
     if ! temp_file=$(mktemp ${suffix:+--suffix="$suffix"}); then
-        die $EXIT_GENERAL_ERROR "Failed to create temporary file"
+        die "$EXIT_GENERAL_ERROR" "Failed to create temporary file"
     fi
     
     # Set restrictive permissions
@@ -354,7 +355,7 @@ secure_download() {
     url=$(validate_url "$url")
     
     if [ -z "$output_file" ]; then
-        die $EXIT_INVALID_ARGS "Output file path cannot be empty"
+        die "$EXIT_INVALID_ARGS" "Output file path cannot be empty"
     fi
     
     log_info "Downloading from: $url"
@@ -365,18 +366,18 @@ secure_download() {
     # Download with security options
     if ! curl -L -f -s -S \
         --max-time 300 \
-        --max-filesize $MAX_FILE_SIZE \
+        --max-filesize "$MAX_FILE_SIZE" \
         --user-agent "RAMSAFE/1.0" \
         --proto "=http,https" \
         --proto-redir "=https" \
         -o "$output_file" \
         "$url"; then
-        die $EXIT_NETWORK_ERROR "Failed to download file from: $url"
+        die "$EXIT_NETWORK_ERROR" "Failed to download file from: $url"
     fi
     
     # Verify download
     if [ ! -f "$output_file" ] || [ ! -s "$output_file" ]; then
-        die $EXIT_NETWORK_ERROR "Download failed or resulted in empty file"
+        die "$EXIT_NETWORK_ERROR" "Download failed or resulted in empty file"
     fi
     
     local file_size
